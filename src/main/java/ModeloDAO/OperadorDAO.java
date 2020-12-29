@@ -98,5 +98,51 @@ public class OperadorDAO {
         }
         return list;
     }
+    
+    public List DatosOp(String email) {
+        Clase_Conexion cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        ArrayList<DatosOperador> list = new ArrayList<>();
+        String consulta = "SELECT * FROM operarios where email='"+email+"';";
+        try {
+            cn = new Clase_Conexion();
+            pst = cn.getConnection().prepareStatement(consulta);
+            rs = pst.executeQuery(consulta);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+               DatosOperador pro=new DatosOperador();
+               pro.setNom(rs.getString("nombre"));
+               pro.setAp(rs.getString("ap"));
+               pro.setAm(rs.getString("am"));
+               pro.setCurp(rs.getString("curp"));
+               pro.setFecha(rs.getString("fechaNacimiento"));
+               pro.setCalle(rs.getString("calle"));
+               pro.setNumero("numero");
+               pro.setColonia(rs.getString("colonia"));
+               pro.setEstado(rs.getString("estado"));
+               pro.setEmail(rs.getString("email"));
+                list.add(pro);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (cn.getConnection() != null) {
+                    cn.getConnection().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error" + e);
+            }
+        }
+        return list;
+    }
 
 }
