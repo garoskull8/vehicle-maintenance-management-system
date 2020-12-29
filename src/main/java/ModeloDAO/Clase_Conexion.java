@@ -9,7 +9,9 @@ public class Clase_Conexion{
 
         private String user="root";
 	private String password="edwing";
+
 	private String url="jdbc:mysql://localhost:3306/vehicle-maintenance-management-system?useSSL=false";
+
         
 
 
