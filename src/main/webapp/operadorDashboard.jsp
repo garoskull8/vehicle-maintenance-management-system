@@ -79,8 +79,8 @@
      <nav class="nav-menu">
         <ul> 
           <li class="active"><a href="operadorDashboard.jsp"><i class="bx bx-home"></i> <span>Inicio</span></a></li>
-          <li><a href="#about"><i class="bx bx-user"></i> <span>check in & cheack out</span></a></li>
-          <li><a href="#resume"><i class="bx bx-arrow-to-bottom"></i><form action="CerrarSesion" method="post">    
+          <li><a href="chequear.jsp"><i class="bx bx-user"></i> <span>check in & cheack out</span></a></li>
+          <li><a href="#"><i class="bx bx-arrow-to-bottom"></i><form action="CerrarSesion" method="post">    
                                 <span><input class="btn btn-link text-secondary" type="submit" value="Cerrar sesión"></span>
                             </form></a></li>
          <!--  <li><a href="#portfolio"><i class="bx bx-book-content"></i> Portfolio</a></li>
