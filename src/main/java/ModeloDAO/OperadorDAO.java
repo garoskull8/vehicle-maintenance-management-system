@@ -98,5 +98,35 @@ public class OperadorDAO {
         }
         return list;
     }
+    
+    public boolean actualizarTareasOP(String id,String fechaSalida, String prioridad, String estado){
+        PreparedStatement  pst=null;
+        Clase_Conexion cn = null;
+        try{
+          cn = new Clase_Conexion();        
+          String consulta="UPDATE tareasmantenimiento SET FechaSalida=?,prioridad=?,estado=? WHERE idtareasMantenimiento=?";
+          pst=cn.getConnection().prepareStatement(consulta);
+          pst.setString(1,fechaSalida);
+          pst.setString(2,prioridad);
+          pst.setString(3,estado);
+          pst.setString(4,id);
+          
+          if(pst.executeUpdate()==1){ //afecto 1 fila
+              return true;
+          }
+      }catch(Exception ex){
+          System.err.println("Error"+ex);
+          
+      }finally{
+          try{
+          if(cn.getConnection()!=null)cn.getConnection().close();
+          if(pst!=null)pst.close();
+          }catch(Exception e){
+                  System.err.println("Error"+e);
+                  }
+      }
+        
+        return false;
+    }
 
 }
