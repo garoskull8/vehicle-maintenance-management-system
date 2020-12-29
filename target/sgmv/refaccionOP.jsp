@@ -4,6 +4,8 @@
     Author     : edgar
 --%>
 
+<%@page import="ModeloDAO.Refacciones"%>
+<%@page import="ModeloDAO.RefaccionesOPDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="ModeloDAO.TareaAsignadaOP"%>
@@ -25,6 +27,7 @@
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     </head>
@@ -37,8 +40,6 @@
                     = new SimpleDateFormat("dd/MM/yyyy");
             String currentDate = ft.format(dNow);
             String idTarea = request.getParameter("idTarea");
-            String estado = request.getParameter("estado");
-            String prioridad = request.getParameter("prioridad");
             String sesion = null;
             if (session.getAttribute("operador") != null) {
                 sesion = (String) session.getAttribute("operador");
@@ -85,63 +86,67 @@
         <!-- Page Content -->
         <div style="margin-top: 50px;" class="container">
             <div class="row">
-                <div class="col-6">
-                    <h1>Editar Prioridad y Estado</h1>
+                <a href="tareasMantenimientoOp.jsp" class="btn btn-success">Regresar</a>
+            </div>
+            <br>
+            <div class="row">
+                <div class="row">
+                <div class="col-8">
+                <h1>Refacciones asignadas a la tarea <%=idTarea%></h1>
                 </div>
-                <br>
-                <div class="col-6">
-                    <h1>ID de Tarea: <% out.println(idTarea);%></h1>
+                <div class="col-4">
+                 <a href="agregarRefaccion.jsp" class="btn btn-success">Agregar refacción</a>
+                </div>
                 </div>
                 <br>
 
                 <div class="container-fluid "  style="margin-left:40px"> 
                     <div class="row">
-                        <form action="" method="post">
-                            <div class="row">
-                                <label class="col-form-label" for="prioridad">Seleccione prioridad:</label>
-                                <div id="prioridad">
-                                    <select class="form-control" name="prioridad">
-                                        <option value="<%=prioridad%>" selected><%
-                                            if (prioridad.equals("0")) {
-                                                out.println("Baja");
-                                            } else if (prioridad.equals("1")) {
-                                                out.println("Media");
-                                            } else if (prioridad.equals("2")) {
-                                                out.println("Alta");
-                                            }
+                        <table class="table table-hover  table-responsive table-bordered border-dark col-sm-18 display" id="myTable" border="5">
+                            <thead>
+                                <tr>
+
+                                    <th>ID</th>
+                                    <th>NOMBRE</th>
+                                    <th>CANTIDAD</th>
+                                    <th>ACCIONES</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <%
+                                    RefaccionesOPDAO dao = new RefaccionesOPDAO();
+                                    List<Refacciones> list = dao.listarRefaccionOP(idTarea);
+                                    Iterator<Refacciones> iter = list.iterator();
+                                    Refacciones alu = null;
+                                    while (iter.hasNext()) {
+                                        alu = iter.next();
 
 
-                                            %></option>
-                                        <option value="2">Alta</option>
-                                        <option value="1">Media</option>
-                                        <option value="0">Baja</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <label class="col-form-label" for="estadp">Seleccione estado:</label>
-                                <div id="estado">
-                                    <select class="form-control" value="estado">
-                                        <option value="<%=estado%>" selected><%
-                                            if (estado.equals("0")) {
-                                                out.println("En reparación");
-                                            } else if (estado.equals("1")) {
-                                                out.println("Listo");
-                                            }
-                                            %></option>
-                                        <option value="1">Listo</option>
-                                        <option value="0">En reparación</option>
-                                    </select>
-                                </div>
-                            </div>        
-                        </form>
+                                %>
+                                <tr>
+                                    <td><%=alu.getId()%></td>
+                                    <td><%=alu.getNombre()%></td>
+                                    <td><%=alu.getCantidad() %></td>
+                                    
+                                <td>
+                                    <input type="text" value="<%=alu.getId()%>" name="idRefaccion" hidden>
+                                    <input type="text" value="<%=idTarea%>" name="idTarea" hidden>
+                                        <input type="text" value="editarRefaccionOP" name="accion" hidden>
+                                        <button type="submit" class="btn btn-warning">Actualizar</button>
+                                    <a class="btn btn-danger"  href="Operador?accion=borrarRefaccionOP&idTarea=<%=alu.getId()%>&idRefaccion=<%=alu.getId()%>">Eliminar</a>
+                                    
+                                </td>
+                            </tr>
+                            <%}%>
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>
             </div>
         </div>
-
 
         <!-- /.container -->
 
@@ -156,7 +161,8 @@
         <!-- Bootstrap core JavaScript -->
         <script src="js/jquery-3.5.1.slim.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+        <script src="js/operador.js"></script>
     </body>
 
 </html>

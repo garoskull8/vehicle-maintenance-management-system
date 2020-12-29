@@ -29,7 +29,7 @@ public class Operador extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private String prioridadYestado = "prioridadYestadoOP.jsp";
+    private String refacciones = "refaccionOP.jsp";
     private String tareas = "tareasMantenimientoOp.jsp";
     private String accion = "";
 
@@ -69,8 +69,8 @@ public class Operador extends HttpServlet {
         String acceso = "";
         accion = request.getParameter("accion");
 
-        if (accion.equals("editarPyE")) {
-            acceso = prioridadYestado;
+        if (accion.equals("editarROP")) {
+            acceso = refacciones;
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
