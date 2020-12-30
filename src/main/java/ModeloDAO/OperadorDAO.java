@@ -129,6 +129,7 @@ public class OperadorDAO {
         
         return false;
     }
+
     public List DatosOp(String email) {
         Clase_Conexion cn = null;
         PreparedStatement pst = null;
@@ -175,5 +176,6 @@ public class OperadorDAO {
         return list;
 
     }
+
 
 }

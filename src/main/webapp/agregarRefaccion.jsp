@@ -27,7 +27,7 @@
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+       <link href="css/main.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     </head>
@@ -86,73 +86,56 @@
         <!-- Page Content -->
         <div style="margin-top: 50px;" class="container">
             <div class="row">
-                <a href="tareasMantenimientoOp.jsp" class="btn btn-success">Regresar</a>
+                <a href="refaccionOP.jsp?idTarea=<%=idTarea%>" class="btn btn-success">Regresar</a>
             </div>
             <br>
             <%
             if(request.getAttribute("error") != null){
-                out.println("<div class=\"alert alert-danger alert-dismissible fade show\" id=\"mensaje3\">Error agregar refacción, refacción ya asignada </div>");
+                out.println("<div class=\"alert alert-danger alert-dismissible fade show\" id=\"mensaje3\">Error agregar refacción, almacen insuficiente </div>");
             }
      %>
             <div class="row">
                 <div class="row">
-                <div class="col-8">
-                <h1>Refacciones asignadas a la tarea <%=idTarea%></h1>
-                </div>
-                <div class="col-4">
-                 <a href="Operador?accion=agregarRefaccion&idTarea=<%=idTarea%>" class="btn btn-success">Agregar refacción</a>
-                </div>
+                    <h1>Asignar refacción a la tarea <%=idTarea%></h1>
                 </div>
                 <br>
 
                 <div class="container-fluid "  style="margin-left:40px"> 
                     <div class="row">
-                        <table class="table table-hover  table-responsive table-bordered border-dark col-sm-18 display" id="myTable" border="5">
-                            <thead>
-                                <tr>
-
-                                    <th>ID</th>
-                                    <th>NOMBRE</th>
-                                    <th>CANTIDAD</th>
-                                    <th>ACCIONES</th>
-
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <%
-                                    RefaccionesOPDAO dao = new RefaccionesOPDAO();
-                                    List<Refacciones> list = dao.listarRefaccionOP(idTarea);
-                                    Iterator<Refacciones> iter = list.iterator();
-                                    Refacciones alu = null;
-                                    while (iter.hasNext()) {
-                                        alu = iter.next();
+                        <form action="Operador" method="post">
+                            <div class="row">
+                                <label class="col-form-label" for="refaccion">Seleccionar refacción:</label>
+                                <select id="refaccion" class="form-control" name="idRefaccion" required>
+                                    <option value="" selected>Seleccionar</option>
+                                    <%
+                                        RefaccionesOPDAO dao = new RefaccionesOPDAO();
+                                        List<Refacciones> list = dao.listarRefaccion(idTarea);
+                                        Iterator<Refacciones> iter = list.iterator();
+                                        Refacciones alu = null;
+                                        while (iter.hasNext()) {
+                                            alu = iter.next();
 
 
-                                %>
-                                <tr>
-                                    <td><%=alu.getId()%></td>
-                                    <td><%=alu.getNombre()%></td>
-                            <form action="Operador" method="post">
-                                    <td><input type="number" class="form-control" name="cantidadDeseada" value="<%=alu.getCantidad() %>"></td>
-                                    
-                                <td>
-                                    <input type="text" value="<%=alu.getId()%>" name="idRefaccion" hidden>
-                                    <input type="text" value="<%=idTarea%>" name="idTarea" hidden>
-                                    <input type="text" value="<%=alu.getCantidad()%>" name="cantidad" hidden>
-                                        <input type="text" value="editarRefaccionOP" name="accion" hidden>
-                                        <button type="submit" class="btn btn-warning">Actualizar</button>
-                            </form>
-                                    <a class="btn btn-danger"  href="Operador?accion=eliminarRefaccionOP&idTarea=<%=idTarea%>&idRefaccion=<%=alu.getId()%>&cantidad=<%= alu.getCantidad()%>">Eliminar</a>
-                                    
-                                </td>
-                            </tr>
-                            <%}%>
-                            </tbody>
-                        </table>
+                                    %>
+                                    <option value="<%=alu.getId()%>"><%=alu.getNombre()%></option>
+                                    <%}%>           
+                                </select>
+
+                            </div>
+                                <br>
+                            <div class="row">
+                                <label class="col-form-label" for="cantidad">Cantidad:</label>
+                                <input type="number" min="1" class="form-control" name="cantidad" required>
+                            </div>
+                                <br>
+                                <input type="text" name="idTarea" value="<%=idTarea%>" hidden>
+                                <input type="text" name="accion" value="agregarRefaccion" hidden>
+                                <button type="submit" class="btn btn-primary">Enviar</button>
+                        </form>
 
                     </div>
                 </div>
+                                <br><br><br>
             </div>
         </div>
 
