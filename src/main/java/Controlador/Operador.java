@@ -6,8 +6,12 @@
 package Controlador;
 
 import ModeloDAO.OperadorDAO;
+import ModeloDAO.Refacciones;
+import ModeloDAO.RefaccionesOPDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +35,7 @@ public class Operador extends HttpServlet {
      */
     private String refacciones = "refaccionOP.jsp";
     private String tareas = "tareasMantenimientoOp.jsp";
+    private String agregarRefaccion = "agregarRefaccion.jsp";
     private String accion = "";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -71,6 +76,32 @@ public class Operador extends HttpServlet {
 
         if (accion.equals("editarROP")) {
             acceso = refacciones;
+        } else if (accion.equals("agregarRefaccion")) {
+            acceso = agregarRefaccion;
+        }else if(accion.equals("eliminarRefaccionOP")){
+            String idTarea = request.getParameter("idTarea");
+            String idRefaccion = request.getParameter("idRefaccion");
+            String cantidad = request.getParameter("cantidad");
+            RefaccionesOPDAO rDAO = new RefaccionesOPDAO();
+            int cantidadStock =Integer.parseInt(rDAO.consultarRefaccion(idRefaccion));
+            if(rDAO.eliminarRefaccion(idTarea, idRefaccion, cantidad)){
+                System.out.println("Eliminado");
+                int cantidadEliminada=Integer.parseInt(cantidad);
+                cantidadStock=cantidadStock+cantidadEliminada;
+                if(rDAO.actualizarRefaccion(idRefaccion, cantidadStock)){
+                            request.setAttribute("idTarea", idTarea);
+                            acceso=refacciones;
+                        }else{
+                           System.out.println("Refaccion NO actualizada"); 
+                           request.setAttribute("idTarea", idTarea);
+                            acceso=refacciones;
+                        }
+                
+            }else{
+                request.setAttribute("idTarea", idTarea);
+                 acceso=refacciones;
+            }
+            
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
@@ -106,7 +137,81 @@ public class Operador extends HttpServlet {
 
             }
 
-        }
+        } else if (accion.equals("agregarRefaccion")) {
+            String idTarea = request.getParameter("idTarea");
+            String idRefaccion = request.getParameter("idRefaccion");
+            String cantidad = request.getParameter("cantidad");
+            System.out.println("cantidad"+cantidad);
+            RefaccionesOPDAO rDAO = new RefaccionesOPDAO();
+                int cantidadDeseada = Integer.parseInt(cantidad);
+                int cantidadStock =Integer.parseInt(rDAO.consultarRefaccion(idRefaccion));
+                System.out.println("Cantidad en stock"+cantidadStock);
+                if (cantidadStock >= cantidadDeseada) {
+                    System.out.println("Cantidad en stock"+cantidadStock);
+                    System.out.println("Hay stock");
+                    if(rDAO.insertarRefaccionOP(idTarea, idRefaccion, cantidad)){
+                        System.out.println("Refaccion registrada");
+                        
+                        cantidadStock=cantidadStock-cantidadDeseada;
+                        if(rDAO.actualizarRefaccion(idRefaccion, cantidadStock)){
+                            request.setAttribute("idTarea", idTarea);
+                            acceso=refacciones;
+                        }else{
+                           System.out.println("Refaccion NO actualizada"); 
+                           request.setAttribute("idTarea", idTarea);
+                            acceso=refacciones;
+                        }
+                    }else{
+                        acceso=refacciones;
+                        request.setAttribute("idTarea", idTarea);
+                        request.setAttribute("error", true);
+                    }
+                } else {
+                    System.out.println("No hay stock");
+                    acceso = agregarRefaccion;
+                    request.setAttribute("idTarea", idTarea);
+                    request.setAttribute("error", true);
+                }
+            }else if(accion.equals("editarRefaccionOP")){
+                String idTarea = request.getParameter("idTarea");
+                String idRefaccion = request.getParameter("idRefaccion");
+                String cantidad = request.getParameter("cantidad");
+                String cantidadDeseada = request.getParameter("cantidadDeseada");
+                System.out.println("Actualizar refaccion");
+                int cantidadd=Integer.parseInt(cantidad);
+                int cantidadDeseadaa=Integer.parseInt(cantidadDeseada);
+                int residuo=cantidadd-cantidadDeseadaa;
+                RefaccionesOPDAO rDAO = new RefaccionesOPDAO();
+                int cantidadStock =Integer.parseInt(rDAO.consultarRefaccion(idRefaccion));
+                int cantidadActualizada=cantidadStock+residuo;
+                if (cantidadStock+residuo >= 0){
+                    if(rDAO.actualizarRefaccionOP(idTarea, idRefaccion, cantidadDeseada)){
+                        System.out.println("Refaccion actualizada");
+                        if(rDAO.actualizarRefaccion(idRefaccion, cantidadActualizada)){
+                            request.setAttribute("idTarea", idTarea);
+                            acceso=refacciones;
+                        }else{
+                           System.out.println("Refaccion NO actualizada"); 
+                           request.setAttribute("idTarea", idTarea);
+                            acceso=refacciones;
+                        }
+                    }else{
+                        acceso=refacciones;
+                        request.setAttribute("idTarea", idTarea);
+                        request.setAttribute("error", true);
+                    }
+                    
+                    
+                }else{
+                    System.out.println("No hay stock");
+                    acceso = refacciones;
+                    request.setAttribute("idTarea", idTarea);
+                    request.setAttribute("error", true);
+                }
+                
+            }
+
+        
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
 

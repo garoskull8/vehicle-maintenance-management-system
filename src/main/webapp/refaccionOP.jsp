@@ -89,13 +89,18 @@
                 <a href="tareasMantenimientoOp.jsp" class="btn btn-success">Regresar</a>
             </div>
             <br>
+            <%
+            if(request.getAttribute("error") != null){
+                out.println("<div class=\"alert alert-danger alert-dismissible fade show\" id=\"mensaje3\">Error agregar refacción, refacción ya asignada </div>");
+            }
+     %>
             <div class="row">
                 <div class="row">
                 <div class="col-8">
                 <h1>Refacciones asignadas a la tarea <%=idTarea%></h1>
                 </div>
                 <div class="col-4">
-                 <a href="agregarRefaccion.jsp" class="btn btn-success">Agregar refacción</a>
+                 <a href="Operador?accion=agregarRefaccion&idTarea=<%=idTarea%>" class="btn btn-success">Agregar refacción</a>
                 </div>
                 </div>
                 <br>
@@ -128,14 +133,17 @@
                                 <tr>
                                     <td><%=alu.getId()%></td>
                                     <td><%=alu.getNombre()%></td>
-                                    <td><%=alu.getCantidad() %></td>
+                            <form action="Operador" method="post">
+                                    <td><input type="number" class="form-control" name="cantidadDeseada" value="<%=alu.getCantidad() %>"></td>
                                     
                                 <td>
                                     <input type="text" value="<%=alu.getId()%>" name="idRefaccion" hidden>
                                     <input type="text" value="<%=idTarea%>" name="idTarea" hidden>
+                                    <input type="text" value="<%=alu.getCantidad()%>" name="cantidad" hidden>
                                         <input type="text" value="editarRefaccionOP" name="accion" hidden>
                                         <button type="submit" class="btn btn-warning">Actualizar</button>
-                                    <a class="btn btn-danger"  href="Operador?accion=borrarRefaccionOP&idTarea=<%=alu.getId()%>&idRefaccion=<%=alu.getId()%>">Eliminar</a>
+                            </form>
+                                    <a class="btn btn-danger"  href="Operador?accion=eliminarRefaccionOP&idTarea=<%=idTarea%>&idRefaccion=<%=alu.getId()%>&cantidad=<%= alu.getCantidad()%>">Eliminar</a>
                                     
                                 </td>
                             </tr>
@@ -151,7 +159,7 @@
         <!-- /.container -->
 
         <!-- Footer -->
-        <footer class="py-5 bg-dark">
+        <footer class="fixed-bottom py-5 bg-dark">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Equipo 1 2020</p>
             </div>
