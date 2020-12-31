@@ -154,6 +154,7 @@ public class OperadorDAO {
                pro.setColonia(rs.getString("colonia"));
                pro.setEstado(rs.getString("estado"));
                pro.setEmail(rs.getString("email"));
+               pro.setIdOper(rs.getString("idoperarios"));
                 list.add(pro);
             }
         } catch (Exception e) {
@@ -175,6 +176,111 @@ public class OperadorDAO {
         }
         return list;
 
+    }
+    
+        public List DatosTiempo(String id, String fecha) {
+        Clase_Conexion cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        ArrayList<Tiempos> list = new ArrayList<>();
+        String consulta = "Select idTiempos, operarios_idoperarios, horaLlegada, fecha  from tiempos where  operarios_idoperarios="+id+" and  fecha='"+fecha+"' and validar= 0; ";
+        try {
+            cn = new Clase_Conexion();
+            pst = cn.getConnection().prepareStatement(consulta);
+            rs = pst.executeQuery(consulta);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+               Tiempos pro=new Tiempos();
+               pro.setIdTiempo(rs.getString("idTiempos"));
+               pro.setIdOper(rs.getString("operarios_idoperarios"));
+               pro.setHoraE(rs.getString("horaLlegada"));
+               pro.setFechaE(rs.getString("fecha"));
+                list.add(pro);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (cn.getConnection() != null) {
+                    cn.getConnection().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error" + e);
+            }
+        }
+        return list;
+
+    }
+    
+
+    
+    
+     public boolean Checkin(String id, String hora, String com, String fecha){
+        
+        PreparedStatement  pst=null;
+        Clase_Conexion cn = null;
+        try{
+          cn = new Clase_Conexion();        
+          String consulta="insert into tiempos (operarios_idoperarios, horaLlegada, descripcion, fecha) values (?,?,?,?)";
+          pst=cn.getConnection().prepareStatement(consulta);
+          pst.setString(1,id);
+          pst.setString(2,hora);
+          pst.setString(3,com);
+          pst.setString(4,fecha);
+          
+          if(pst.executeUpdate()==1){ //afecto 1 fila
+              return true;
+          }
+      }catch(Exception ex){
+          System.err.println("Error"+ex);
+          
+      }finally{
+          try{
+          if(cn.getConnection()!=null)cn.getConnection().close();
+          if(pst!=null)pst.close();
+          }catch(Exception e){
+                  System.err.println("Error"+e);
+                  }
+      }
+        
+        return false;
+    }
+  public boolean Checkout(String idop,String idtiempo, String hora){
+         
+        PreparedStatement  pst=null;
+        Clase_Conexion cn = null;
+        try{
+          cn = new Clase_Conexion();        
+          String consulta="update tiempos set horaSalida= ?, validar= 1 where idTiempos= ? and operarios_idoperarios= ?;";
+          pst=cn.getConnection().prepareStatement(consulta);
+          pst.setString(1,hora);
+          pst.setString(2,idtiempo);
+          pst.setString(3,idop);
+         
+          
+          if(pst.executeUpdate()==1){ //afecto 1 fila
+              return true;
+          }
+      }catch(Exception ex){
+          System.err.println("Error"+ex);
+          
+      }finally{
+          try{
+          if(cn.getConnection()!=null)cn.getConnection().close();
+          if(pst!=null)pst.close();
+          }catch(Exception e){
+                  System.err.println("Error"+e);
+                  }
+      }
+        
+        return false;
     }
 
 
