@@ -1,0 +1,9 @@
+ModeloDAO\RefaccionesOPDAO.class
+Controlador\CerrarSesion.class
+ModeloDAO\DatosOperador.class
+Controlador\Logins.class
+ModeloDAO\OperadorDAO.class
+ModeloDAO\TareaAsignadaOP.class
+Controlador\Operador.class
+ModeloDAO\Refacciones.class
+ModeloDAO\Clase_Conexion.class
