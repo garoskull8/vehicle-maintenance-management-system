@@ -118,7 +118,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="comment">Comentario:</label>
-                                        <textarea class="form-control" rows="5" id="comment" name="com"></textarea>
+                                        <textarea class="form-control" rows="5" id="comment" name="com" maxlength="150"></textarea>
                                     </div>
                                     <input id="prodId" name="id" type="hidden" value="<%=op.getIdOper()%>">
                                      <input id="prodId" name="hora" type="hidden" value="<%=hora%>">
