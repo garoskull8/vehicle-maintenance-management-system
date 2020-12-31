@@ -1,6 +1,8 @@
+Controlador\Check.class
 Controlador\CerrarSesion.class
 ModeloDAO\DatosOperador.class
 Controlador\Logins.class
+ModeloDAO\Tiempos.class
 ModeloDAO\OperadorDAO.class
 ModeloDAO\TareaAsignadaOP.class
 Controlador\Operador.class

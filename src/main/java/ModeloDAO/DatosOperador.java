@@ -21,6 +21,16 @@ public class DatosOperador {
     public String colonia; 
     public String estado;
     public String email;
+    public String idOper;
+
+    public String getIdOper() {
+        return idOper;
+    }
+
+    public void setIdOper(String idOper) {
+        this.idOper = idOper;
+    }
+    
 
     public String getNom() {
         return Nom;
