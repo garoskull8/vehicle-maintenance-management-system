@@ -1,0 +1,102 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 4 ene. 2021, 11:24:51
+    Author     : Dylan Abirham
+*/
+
+body{
+    background-color: rgba(230,189,8, .09);
+}
+h2{
+    font-family: 'Assistant', sans-serif!important;
+    font-weight: 700!important;
+    font-style: normal!important;
+    font-size: 45px!important;
+}
+h2{
+    font-family: 'Assistant', sans-serif!important;
+    font-weight: 700!important;
+    font-style: normal!important;
+    font-size: 30px!important;
+}
+h3{
+   font-family: 'Assistant', sans-serif!important;
+    font-weight: 700!important;
+    font-style: normal!important;
+    font-size: 23px!important; 
+}
+p{
+    font-family: 'Assistant', sans-serif!important;
+    font-weight: 400!important;
+    font-style: normal!important;
+    font-size: 25px;
+}
+hr {
+    border-top: 3px solid rgb(230, 189, 8)!important;
+    margin: 0 25%!important;
+    box-sizing: inherit!important;
+    opacity: 1!important;
+    
+}
+
+
+/*PRINCIPAL*/
+.navbar {
+    background: rgba(30, 13, 129, .03);
+}
+
+/**CONFIGURACION DE EMPLEADOS**/
+.titulo {
+    color: #1f0d81;
+}
+.table thead th {
+    font-family: 'Assistant', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+.table td{
+    font-family: 'Assistant';
+    font-weight: 400;
+    font-size: 20px
+}
+/*LISTAR EMPLEADOS*/
+.cabecero {
+    background: rgb(30, 13, 129);
+    color: white;
+}
+
+/*FORMULARIO*/
+.formul {
+    background: rgba(30, 13, 129, 0.06);
+}
+.agregar {
+    border-color: #1f0d81;
+    background: transparent;
+    font-family: 'Assistant', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 17px;
+}
+.agregar:hover {
+    background-color: rgb(30, 13, 129);
+    color: white;
+}
+/*MEMCRUD*/
+.card-header:first-child{
+    background-color: rgba(30,13, 124, .8);
+    color: white;
+    text-transform: uppercase;
+}
+.card-body{
+    background-color: rgba(30,13,129, .03);
+}
+ul li {
+    font-family: 'Assistant', sans-serif!important;
+    font-weight: 400!important;
+    font-style: normal!important;
+    font-size: 20px;
+}
