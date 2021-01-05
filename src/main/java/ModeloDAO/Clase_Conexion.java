@@ -3,6 +3,7 @@ package ModeloDAO;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Clase_Conexion{
 	private Connection cn;
@@ -12,7 +13,8 @@ public class Clase_Conexion{
 
 	private String url="jdbc:mysql://localhost:3306/vehicle-maintenance-management-system?useSSL=false";
 
-        
+        PreparedStatement pstm = null;
+    ResultSet rs = null;
 
 
  
@@ -38,7 +40,18 @@ public class Clase_Conexion{
 
   public static void main(String[]args){
       Clase_Conexion cn= new Clase_Conexion();
+      
   }
  
+  
+    public ResultSet getDatos(String com){
+        try {
+            this.getConnection();
+            rs = pstm.executeQuery(com);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Error: "+e);
+        }
+        return rs;
+    }
   
 }
