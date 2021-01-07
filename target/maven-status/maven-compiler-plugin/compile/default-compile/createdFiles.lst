@@ -1,4 +1,5 @@
 Controlador\Check.class
+ModeloDAO\AdminDAO.class
 ModeloDAO\RefaccionesOPDAO.class
 Controlador\CerrarSesion.class
 ModeloDAO\DatosOperador.class
