@@ -1,169 +1,116 @@
 <%-- 
     Document   : refaccionesAdmon
-    Created on : 4/01/2021, 05:23:40 PM
+    Created on : 7/01/2021, 05:33:14 PM
     Author     : yosah
 --%>
-<%@page import="ModeloDAO.Refacciones"%>
-<%@page import="ModeloDAO.RefaccionesOPDAO"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.List"%>
-<%@page import="ModeloDAO.TareaAsignadaOP"%>
-<%@page import="ModeloDAO.OperadorDAO"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+
+<html lang="en">
     <head>
-        
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-        
         <title>SGMV</title>
-        
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <link href="css/main.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
-        <body>
-        <%
-
-            Date dNow = new Date();
-            SimpleDateFormat ft
-                    = new SimpleDateFormat("dd/MM/yyyy");
-            String currentDate = ft.format(dNow);
-            String idTarea = request.getParameter("idTarea");
-            /*String sesion = null;
-            if (session.getAttribute("operador") != null) {
-                sesion = (String) session.getAttribute("operador");
-                //out.println("Sesion iniciada: "+sesion );
-                out.println("Sesion iniciada: " + sesion);
-            } else {
-                request.getSession().setAttribute("expiro", false);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }*/
-        %>
-        
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <div class="container">
-                <a class="navbar-brand" href="#">INICIO</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Acerca</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Servicios</a>
-                        </li>
-                        <li class="nav-item">
-                            <form action="CerrarSesion" method="post">    
-                                <input class="btn btn-link text-white" type="submit" value="Cerrar sesi贸n">
-                            </form>
-                        </li>
-                    </ul>
+        <div class="card mb-6" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="img/mecanica.png" alt="...">
                 </div>
-            </div>
-        </nav>
-
-        <!-- Page Content -->
-
-        <!-- Page Content -->
-        <div style="margin-top: 50px;" class="container">
-            <div class="row">
-                <!--Cambiar direccion a la que regresa, poner vista principal del administrador-->
-                <a href="tareasMantenimientoOp.jsp" class="btn btn-success">Regresar</a>  
-            </div>
-            <br>
-            <%
-            if(request.getAttribute("error") != null){
-                out.println("<div class=\"alert alert-danger alert-dismissible fade show\" id=\"mensaje3\">Error agregar refacci贸n, refacci贸n ya asignada </div>");
-            }
-     %>
-            <div class="row">
-                <div class="row">
-                <div class="col-8">
-                <h1>Inventario de Refacciones</h1>
-                </div>
-                </div>
-                
-                <br>
-
-                <div class="container-fluid "  style="margin-left:40px"> 
-                    <div class="row">
-                        <table class="table table-hover  table-responsive table-bordered border-dark col-sm-18 display" id="myTable" border="5">
-                            <thead>
-                                <tr>
-
-                                    <div class="col-4">
-                                        <a href="registroRefaccion.jsp" class="btn btn-success">Registrar refacci贸n</a>
-                                    </div>
-
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <%
-                                    RefaccionesOPDAO dao = new RefaccionesOPDAO();
-                                    List<Refacciones> list = dao.listarRefaccionOP(idTarea);
-                                    Iterator<Refacciones> iter = list.iterator();
-                                    Refacciones alu = null;
-                                    while (iter.hasNext()) {
-                                        alu = iter.next();
-
-
-                                %>
-                                <tr>
-                                    <td><%=alu.getId()%></td>
-                                    <td><%=alu.getNombre()%></td>
-                            <form action="Operador" method="post">
-                                    <td><input type="number" class="form-control" name="cantidadDeseada" value="<%=alu.getCantidad() %>"></td>
-                                    
-                                <td>
-                                    <input type="text" value="<%=alu.getId()%>" name="idRefaccion" hidden>
-                                    <input type="text" value="<%=idTarea%>" name="idTarea" hidden>
-                                    <input type="text" value="<%=alu.getCantidad()%>" name="cantidad" hidden>
-                                        <input type="text" value="editarRefaccionOP" name="accion" hidden>
-                                        <button type="submit" class="btn btn-warning">Actualizar</button>
-                            </form>
-                                    <a class="btn btn-danger"  href="Operador?accion=eliminarRefaccionOP&idTarea=<%=idTarea%>&idRefaccion=<%=alu.getId()%>&cantidad=<%= alu.getCantidad()%>">Eliminar</a>
-                                    
-                                </td>
-                            </tr>
-                            <%}%>
-                            </tbody>
-                        </table>
-
+                <div class="text-white bg-dark col-md-8">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">Inventario de Refacciones</h2>
                     </div>
                 </div>
             </div>
         </div>
+        <br>
+        <br>
+        <!-- Nav tabs -->
+        <div class= "container p-5">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#registro">Registro refacciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#consulta">Consulta de refacciones</a>
+                </li>
+            </ul>
 
-        <!-- /.container -->
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div id="registro" class="container tab-pane active"><br>
+                    <!-- Formualrio del bot髇 registro-->
+                    <form  action="Logins" method="post">
+                        <div class="form-label-group">
+                            <label for="inputNombre">Nombre: </label>
+                            <input type="text" id="inputNombre" class="form-control" placeholder="Nombre" name="nombre" required autofocus>                           
+                        </div>
+                        <div class="form-label-group">
+                            <label for="inputCantidad">Cantidad </label>
+                            <input type="number" id="inputNombre" class="form-control" placeholder="Cantidad" name="cantidad" required autofocus>                           
+                        </div>
+                        <input type="text"  id="accion" name="accion" value="regRefaccion" hidden>
+                        <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Registrar</button>
+                    </form>
+                </div>
+                <!-- Tabla del bot髇 consulta-->
+                <div id="consulta" class="container tab-pane fade"><br>
+                    <div class="container-fluid"  style="margin-left:100px"> 
+                        <div class="row">
+                            <table class="table table-hover  table-responsive table-bordered border-dark col-sm-18 display" id="myTable" border="5">
+                                <thead>
+                                    <tr>
 
-        <!-- Footer -->
-        <footer class="fixed-bottom py-5 bg-dark">
-            <div class="container">
-                <p class="m-0 text-center text-white">Copyright &copy; Equipo 1 2020</p>
+                                        <th>ID</th>
+                                        <th>NOMBRE</th>
+                                        <th>CANTIDAD</th>
+                                        <th>ACCIONES</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><p>idRefaccion</p></td>
+                                        <td><p>nomRefaccion</p></td>
+                                        <td><p>cantRefaccion</p></td>
+                                        <td> 
+                                            <div class="container">                                             
+                                                <!-- Nav tabs -->
+                                                <ul class="nav nav-tabs nav-justified" role="tablist">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" data-toggle="tab" href="#actualizar">Actulizar Stock</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-toggle="tab" href="#eliminar">Eliminar refacci髇</a>
+                                                    </li>
+                                                </ul>
+
+                                                <!-- Tab panes -->
+                                                <div class="tab-content">
+                                                    <div id="actualizar" class="container tab-pane active"><br>
+                                                        <h3>Actulizar</h3>
+                                                    </div>
+                                                    <div id="eliminar" class="container tab-pane fade"><br>
+                                                        <h3>Eliminar</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- /.container -->
-        </footer>
-
-        <!-- Bootstrap core JavaScript -->
-        <script src="js/jquery-3.5.1.slim.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
-        <script src="js/operador.js"></script>
+        </div>    
     </body>
 </html>

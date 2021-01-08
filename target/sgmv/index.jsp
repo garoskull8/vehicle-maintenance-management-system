@@ -69,7 +69,7 @@
 
       <div class="col-lg-3 col-md-6 mb-4">
         <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+            <p><img class="card-img-top" src="http://placehold.it/500x325" alt=""></p>
           <div class="card-body">
             <h4 class="card-title">Card title</h4>
             <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
