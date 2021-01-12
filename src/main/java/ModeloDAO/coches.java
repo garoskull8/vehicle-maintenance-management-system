@@ -12,6 +12,7 @@ package ModeloDAO;
 public class coches {
      int idvehiculos;
  int  idchofer;
+  String descripción;
   String placas;
   String marca;
   String modelo;

@@ -15,10 +15,57 @@ public class Tiempos {
     public String idOper;
     public String FechaE;
     public String horaE;
+     public String horaS;
+      public String nombre;
+       public String ap;
+        public String am;
+        public String Tiempo;
+
+    public String getTiempo() {
+        return Tiempo;
+    }
+
+    public void setTiempo(String Tiempo) {
+        this.Tiempo = Tiempo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getAp() {
+        return ap;
+    }
+
+    public void setAp(String ap) {
+        this.ap = ap;
+    }
+
+    public String getAm() {
+        return am;
+    }
+
+    public void setAm(String am) {
+        this.am = am;
+    }
     public static  int var = 0;
     public static String idestatico;
     public static String name;
+    
     public static String fecha_entrada;
+
+    public String getHoraS() {
+        return horaS;
+    }
+
+    public void setHoraS(String horaS) {
+        this.horaS = horaS;
+    }
+    
 
     public static String getFecha_entrada() {
         return fecha_entrada;

@@ -3,98 +3,168 @@
     Created on : 4 ene. 2021, 11:13:40
     Author     : Dylan Abirham
 --%>
-
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-
+<%@page import="ModeloDAO.cocheDAO"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@page import="ModeloDAO.TareaAsignadaOP"%>
+<%@page import="ModeloDAO.OperadorDAO"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@page import="java.sql.ResultSet"%>
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
     <head>
 
-        <link href="css/status.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-        <!--LETRA AUDIOWIDE-->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
-        <!--LETRA ASSISTANT BOLD-->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap" rel="stylesheet">
-
-        <!--BOOTSTRAP
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css" >-->
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-        <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link href="css/status.css" rel="stylesheet" type="text/css"/>
+        <title>STATUS COCHE</title>
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-        <title>Status Coche</title>
     </head>
+
     <body>
-        <h2 class="text-center text-uppercase mt-5 mb-1 titulo">Status del Coche</h2>
-        <div class="d-grid gap-2 d-md-block d-md-flex align-content-center mb-3">
-            <input id="searchTerm" type="text" placeholder="Ingresa tel id del coche a verificar" required autofocus onkeyup="doSearch()" >
-            <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Open modal for @mdo</button>-->
+        <%
 
-        </div>
+            Date dNow = new Date();
+            SimpleDateFormat ft
+                    = new SimpleDateFormat("dd/MM/yyyy");
+            String currentDate = ft.format(dNow);
+            String sesion = null;
+            if (session.getAttribute("operador") != null) {
+                sesion = (String) session.getAttribute("operador");
+                //out.println("Sesion iniciada: "+sesion );
+                out.println("Sesion iniciada: " + sesion);
+            } else {
+                request.getSession().setAttribute("expiro", false);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+        %>
 
-        <hr class="col-md-6 mb-5">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">INICIO</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="operadorDashboard.jsp">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Acerca</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <form action="CerrarSesion" method="post">    
+                                <input class="btn btn-link text-white" type="submit" value="Cerrar sesión">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-        <div class="container-fluid">
+        <!-- Page Content -->
 
+        <!-- Page Content -->
+        <div style="margin-top: 50px;" class="container">
             <div class="row">
-                <div class="col-md-8 ml-2">
-                    <div class="card text-center">
-                        <div class="table-responsive">
-                            <table class="table table-striped card-text">
-                                <thead class="cabecero">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre del conductor</th>
-                                        <th>Placas del coche</th>
-                                        <th>Descripción</th>
-                                        <th>Fecha entrada</th>
-                                        <th>Fecha salida</th>
-                                        <th>Estado</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <jsp:useBean id="cn" class="ModeloDAO.cocheDAO" scope="page"></jsp:useBean>
-                                    <%
-                                        ResultSet rs = cn.listar();
-                                        while (rs.next()) {
-                                    %>
-                                    <!-- Iteramos cada elemento de la lista de clientes -->
-                                    <tr>
-                                        <td><%=rs.getInt("idvehiculos")%></td>
-                                        <td><%=rs.getString("idchofer")%></td>
-                                        <td><%=rs.getString("placas")%></td>
-                                        <td><%=rs.getString("marca")%></td>
-                                        <td><%=rs.getString("modelo")%></td>
-                                        <td><%=rs.getString("tipo")%></td>
-                                    </tr>
+                <a href="operadorDashboard.jsp" class="btn btn-success">Regresar</a>
+            </div>
+            <div class="row">
+                <h1>STATUS DEL COCHE</h1>
+                <br>
+
+                <div class="container-fluid "  style="margin-left:40px"> 
+                    <div class="row">
+                        <table class="table table-hover  table-responsive table-bordered border-dark col-sm-11 display" id="myTable" border="5">
+                            <thead>
+                                <tr>
+
+                                    <th>ID</th>
+                                    <th>CHOFER</th>
+                                    <th>PLACAS</th>
+                                    <th>DESCRIPCION</th>
+                                    <th>FECHAENTRADA</th>
+                                    <th>FECHASALIDA</th>    
+                                    <th>ESTADO</th>
+                                  
+
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                <%
+                                cocheDAO dao = new cocheDAO();
+                                List<TareaAsignadaOP> list = dao.statuscoche(sesion);
+                                Iterator<TareaAsignadaOP> iter = list.iterator();
+                                TareaAsignadaOP alu = null;
+                                while (iter.hasNext()) {
+                                    alu = iter.next();
+
+
+                            %>
+                                <tr>
+                                    <td><%=alu.getId()%></td>
+                                    <td><%=alu.getIdchofer()%></td>
+                                         <td><%=alu.getVehiculo()%></td>
+                                    <td><%=alu.getDescripcion()%></td>              
+                                    <td><%=alu.getFechaEntrada()%></td>
+                                    <td><%=alu.getFechaSalida()%></td>
+                                   
+                                    
+                                       <td><select class="form-control" name="estado">
+                                            <option value="<%=alu.getEstado()%>"><%
+                                                if (alu.getEstado().equals("0")) {
+                                                    out.println("En reparación");
+                                                } else if (alu.getEstado().equals("1")) {
+                                                    out.println("Listo");
+                                                }
+                                                %></option>
+                                      
+                                        </select>
+                                    </td>
+                                </tr>
+                                <%}%>
                                 </tbody>
-                            </table>
-                        </div>
+                        </table>
+
                     </div>
                 </div>
             </div>
         </div>
-        <!--jQuey-->
-        <script src="assets/js/jquery-1.12.0.min.js"></script>
-        <!--AJAX-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <!--BOOTSTRAP-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
-        <script src="assets/js/comunes.js" type="text/javascript"></script>
 
+        <!-- /.container -->
+
+        <!-- Footer -->
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Equipo 1 2020</p>
+            </div>
+            <!-- /.container -->
+        </footer>
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="js/jquery-3.5.1.slim.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+        <script src="js/operador.js"></script>
+        
     </body>
+
 </html>
