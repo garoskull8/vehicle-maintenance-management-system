@@ -83,7 +83,7 @@
                                         <input type="text"  id="accion" name="accion" value="loginOp" hidden>
                                         <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
                                         <div class="text-center">
-                                            <a class="small" href="#">Forgot password?</a></div>
+                                            <a class="small" href="forgot.jsp">Forgot password?</a></div>
                                     </form>
                                 </div>
                             </div>
