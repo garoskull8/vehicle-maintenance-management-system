@@ -18,7 +18,7 @@ import java.util.List;
 public class AdminDAO {
 
     public boolean Login(String email, String pass) {
-        String query = "SELECT email FROM administradores WHERE email='" + email + "' and pass ='" + pass + "';";
+        String query = "SELECT email FROM administrador WHERE email='" + email + "' and pass ='" + pass + "';";
         Clase_Conexion c = null;
         ResultSet rs = null;
         PreparedStatement pst = null;
