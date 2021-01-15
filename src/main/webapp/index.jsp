@@ -21,6 +21,8 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/main.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<!--FontIcon-->
+  <script src="https://kit.fontawesome.com/aed56cebe5.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -29,25 +31,25 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">INICIO</a>
+      <a class="navbar-brand" href="index.jsp">INICIO&nbsp;<i class="fas fa-home"></i></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" href="index.jsp">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Acerca</a>
+            <a class="nav-link" href="acerca_de.jsp">Acerca</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Servicios</a>
+            <a class="nav-link" href="Servicios.jsp">Servicios</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contacto</a>
+            <a class="nav-link" href="Contacto.jsp">Contacto</a>
           </li>
         </ul>
       </div>
@@ -69,10 +71,10 @@
 
       <div class="col-lg-3 col-md-6 mb-4">
         <div class="card h-100">
-          <img class="card-img-top" src="img/operador.png" alt="">
+          <img class="card-img-top" src="img/administrador.png" alt="">
           <div class="card-body">
-              <h4 class="card-title"><strong>Operador</strong></h4>
-            <p class="card-text">Iniciar sesión como operario.</p>
+              <h4 class="card-title"><strong>Administrativo</strong></h4>
+            <p class="card-text">Iniciar sesión como Administrativo.</p>
           </div>
           <div class="card-footer">
             <a href="Login_Admin.jsp" class="btn btn-success botonRedondo">Continuar</a>
