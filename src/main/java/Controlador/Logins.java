@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import ModeloDAO.AdminDAO;
 import ModeloDAO.OperadorDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -93,6 +94,21 @@ public class Logins extends HttpServlet {
                 }else{
                     request.getSession().setAttribute("err",false);
                     request.getRequestDispatcher("operador_login.jsp").forward(request, response);
+                    System.out.println("Datos incorrectos");
+                    Cookie cookie = new Cookie("0","Usuario o contraseña incorrectos");
+                    response.addCookie(cookie);
+                }
+            } else if(accion.equals("loginAD")){
+                AdminDAO op = new AdminDAO();
+                if(op.Login(email, pass)){
+                    System.out.println("VALE");
+                    session.setAttribute("administrador",email); // SE CONFIGURA LA SESION CON UNA VARIABLE
+                    session.setMaxInactiveInterval(5000); // SE DEFINE EL TIEMPO MAXIMO DE INACTIVIDAD (5000segundos)
+                    System.out.println("Sesion iniciada");
+                    request.getRequestDispatcher("adminDashboard.jsp").forward(request, response);
+                }else{
+                    request.getSession().setAttribute("err",false);
+                    request.getRequestDispatcher("Login_Admin.jsp").forward(request, response);
                     System.out.println("Datos incorrectos");
                     Cookie cookie = new Cookie("0","Usuario o contraseña incorrectos");
                     response.addCookie(cookie);

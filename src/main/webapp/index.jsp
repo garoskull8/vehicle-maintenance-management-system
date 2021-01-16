@@ -69,14 +69,17 @@
 
       <div class="col-lg-3 col-md-6 mb-4">
         <div class="card h-100">
+<<<<<<< HEAD
             <p><img class="card-img-top" src="http://placehold.it/500x325" alt=""></p>
+=======
+          <img class="card-img-top" src="img/operador.png" alt="">
+>>>>>>> 57f65e1e3bcb6ac33768d74c9bf4f7f757e3c13e
           <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-            
+              <h4 class="card-title"><strong>Operador</strong></h4>
+            <p class="card-text">Iniciar sesión como operario.</p>
           </div>
           <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
+            <a href="Login_Admin.jsp" class="btn btn-success botonRedondo">Continuar</a>
           </div>
         </div>
       </div>

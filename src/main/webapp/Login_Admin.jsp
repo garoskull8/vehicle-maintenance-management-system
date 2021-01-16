@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../webapp/css/login.css">
+  <link rel="stylesheet" href="../../main/webapp/css/login.css">
 </head>
 <body>
   <!--Barra de Navegación-->
@@ -51,27 +51,28 @@
       <div class="row">
         <div class="col-sm-6 login-section-wrapper">
           <div class="brand-wrapper">
-            <img src="../../webapp/img/LOGO-IPN.png" alt="logo" class="logo">
+            <img src="../../main/webapp/img/LOGO-IPN.png" alt="logo" class="logo">
           </div>
           <div class="login-wrapper my-auto">
             <h1 class="login-title">Log in Admin</h1>
-            <form action="#!">
+            <form action="Logins" method="post">
               <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" class="form-control" placeholder="Tucorreo@example.com">
               </div>
               <div class="form-group mb-4">
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control" placeholder="Enter your passsword">
+                <input type="password" name="pass" id="password" class="form-control" placeholder="Enter your passsword">
               </div>
-              <input name="login" id="login" class="btn btn-block login-btn" type="button" value="Login">
+              <input type="text"  id="accion" name="accion" value="loginAD" hidden>
+              <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Ingresar</button>
             </form>
               <!--Reestablecer ContraseñA-->
             <p class="login-wrapper-footer-text">¿Olvidó su contraseña? <a href="forgot.html" class="text-reset">De click Aquí</a></p>
           </div>
         </div>
         <div class="col-sm-6 px-0 d-none d-sm-block">
-          <img src="../../webapp/img/login.jpg" alt="login image" class="login-img">
+          <img src="../../main/webapp/login.jpg" alt="login image" class="login-img">
         </div>
       </div>
     </div>
