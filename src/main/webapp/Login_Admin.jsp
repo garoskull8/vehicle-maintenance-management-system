@@ -47,11 +47,14 @@
   </nav>
   <!--LOGIN-->
   <main>
-    <div class="container-fluid">
+      <br>
+      <br>
+      <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6 login-section-wrapper">
           <div class="brand-wrapper">
-            <img src="../../main/webapp/img/LOGO-IPN.png" alt="logo" class="logo">
+              <br>
+              <img src="img/LOGO-IPN.png" alt="logo" class="logo" width="15%" height="15%">
           </div>
           <div class="login-wrapper my-auto">
             <h1 class="login-title">Log in Admin</h1>
@@ -72,7 +75,7 @@
           </div>
         </div>
         <div class="col-sm-6 px-0 d-none d-sm-block">
-          <img src="../../main/webapp/login.jpg" alt="login image" class="login-img">
+          <img src="img/login.jpg" alt="login image" class="login-img" width="25%" height="50%">
         </div>
       </div>
     </div>

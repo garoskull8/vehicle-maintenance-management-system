@@ -33,15 +33,13 @@
                 </div>
                 <div class="text-white bg-dark col-md-8">
                     <div class="card-body">
-                        <h2 class="card-title text-center">Inventario de Refacciones</h2>
+                        <h2 class="card-title text-center ">Inventario de Refacciones</h2>
                     </div>
                 </div>
             </div>
         </div>
         <br>
-        <%
-            String idRefacciones = request.getParameter("idRefacciones");
-        %>
+        
         <br>
         <!-- Nav tabs -->
         <div class= "container p-5">
@@ -102,7 +100,7 @@
                                         <td><%=alu.getNombre()%></td>
                                         <td><%=alu.getCantidad()%></td>
                                         <td>
-                                            <a class="btn btn-danger"  href="">Eliminar</a>
+                                            <a class="btn btn-danger"  href="Administrador?accion=eliminarRefaccion&idRefaccion=<%=alu.getId()%>">Eliminar</a>
                                         </td>
                                     </tr> 
                                     <%}%>
@@ -144,7 +142,7 @@
         <!-- /.container -->
 
         <!-- Footer -->
-        <footer class="fixed-bottom py-5 bg-dark">
+        <footer class="fixed-bottom py-3 bg-dark">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Equipo 1 2020</p>
             </div>

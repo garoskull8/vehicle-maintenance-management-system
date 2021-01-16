@@ -196,4 +196,29 @@ public class RefaccionesAdminDAO {
         }
         return idUltimo;
     }
+    
+    public boolean eliminarRefaccion(String idrefaccion) {
+        String query = "DELETE FROM refacciones WHERE idrefacciones=?";
+        ResultSet rs=null;
+        PreparedStatement  pst=null;
+        Clase_Conexion cn = null;
+        try{
+            cn = new Clase_Conexion();  
+        pst=cn.getConnection().prepareStatement(query);
+         pst.setString(1, idrefaccion);
+          if(pst.executeUpdate()==1){
+              return true;
+          }
+        }catch(SQLException ex){
+          System.err.println("Error"+ex);
+        }finally{
+          try{
+          if(cn.getConnection()!=null)cn.getConnection().close();
+          if(pst!=null)pst.close();
+          }catch(Exception e){
+                  System.err.println("Error"+e);
+                  }
+      }
+        return false;
+    }
 }

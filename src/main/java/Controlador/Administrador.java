@@ -71,6 +71,23 @@ public class Administrador extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String acceso = "";
         accion = request.getParameter("accion");
+        
+        if(accion.equals("eliminarRefaccion")){
+            RefaccionesAdminDAO adminRef = new RefaccionesAdminDAO();
+            //Obtenemos parámetros para actualizar stock
+            String idRefaccion = request.getParameter("idRefaccion");
+            System.out.println("Eliminar refaccion");
+            
+            if (adminRef.eliminarRefaccion(idRefaccion)) {
+                acceso = refacciones;
+                System.out.print("Refacción eliminada");
+            } else {
+                acceso = refacciones;
+            }
+        }
+        
+        RequestDispatcher vista = request.getRequestDispatcher(acceso);
+        vista.forward(request, response);
     }
 
     /**
@@ -109,10 +126,10 @@ public class Administrador extends HttpServlet {
             System.out.print("cantidad final: "+cantidadStockFinal);
             
             if (adminRef.actualizaStock(idRefaccion, cantidadStockFinal)) {
-                request.setAttribute("idRefaccion", idRefaccion);
+                request.setAttribute("mensaje",1 );
                 acceso = refacciones;
             } else {
-                request.setAttribute("error", true);
+                request.setAttribute("mensaje",2);
                 acceso = refacciones;
             }
         } else if(accion.equals("regRefaccion")){
@@ -126,10 +143,10 @@ public class Administrador extends HttpServlet {
             int ultimoId = Integer.parseInt(adminRef.consultaIdRefaccion());
             int idFinal = ultimoId + 1;
             if (adminRef.registroRefaccion(idFinal, nombre, Integer.parseInt(cantidad))) {
-                request.setAttribute("nombre", nombre);
+                request.setAttribute("mensaje",3 );
                 acceso = refacciones;
             } else {
-                request.setAttribute("error", true);
+                request.setAttribute("mensaje", 2);
                 acceso = refacciones;
             }
         }
