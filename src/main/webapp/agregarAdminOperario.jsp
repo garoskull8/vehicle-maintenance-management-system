@@ -5,6 +5,9 @@
 --%>
 
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="ModeloDAO.Clase_Conexion"%>
 <%@page import="ModeloDAO.AgregarTareaDAO"%>
 <%@page import="ModeloDAO.TareaAdmin"%>
 <%@page import="ModeloDAO.DatosOperador"%>
@@ -39,6 +42,7 @@
                     = new SimpleDateFormat("dd/MM/yyyy");
             String currentDate = ft.format(dNow);
             String sesion = null;
+            String idTarea = request.getParameter("idTarea");
             if (session.getAttribute("admin") != null) {
                 sesion = (String) session.getAttribute("admin");
                 //out.println("Sesion iniciada: "+sesion );
@@ -87,10 +91,15 @@
             <div class="row">
                 <a href="tareasvehiculos.jsp" class="btn btn-success">Regresar</a>
             </div>
+            <%
+            if(request.getAttribute("error") != null){
+                out.println("<div class=\"alert alert-danger alert-dismissible fade show\" id=\"mensaje3\">Error</div>");
+            }
+     %>
             <br>
             <div class="row">
                 <div class="row">
-                    <h1>Agregar Tarea </h1>
+                    <h1>Agregar Operario a la tarea <%=idTarea%> </h1>
                 </div>
                 <br>
                 <div class="container">
@@ -100,14 +109,51 @@
 
                         <form action="Administrador1" method="post">
                             
+                            <label>Seleccione operario: </label>
+                                        <select class="form-control" id="select1" name="idOperario" required onchange="ShowSelected();">
+                                <option value="" selected>Seleccione</option>
+
+                                <%
+                                    Clase_Conexion cn = null;
+                                    PreparedStatement pst = null;
+                                    ResultSet rs = null;
+                                    String consulta="";
+                                    try {
+                                        cn = new Clase_Conexion();
                                         
-                                        <select class="form-control" name="prioridad">
-                                            <option value="2">Alta</option>
-                                            <option value="1">Media</option>
-                                            <option value="0">Baja</option>
-                                        </select>
+                                         consulta = "SELECT idoperarios,nombre,ap,am FROM operarios;";
+                                       
+                                        pst = cn.getConnection().prepareStatement(consulta);
+                                        rs = pst.executeQuery(consulta);
+                                        rs = pst.executeQuery();
+
+                                        while (rs.next()) {
+
+                                            out.println("<option value=" + rs.getString("idoperarios") + ">" + rs.getString("nombre") + "  " + rs.getString("ap") + "  " + rs.getString("am")+ "</option>");
+
+                                        }
+
+                                    } catch (Exception e) {
+                                        out.println(e.toString());
+                                    } finally {
+                                        try {
+                                            if (cn.getConnection() != null) {
+                                                cn.getConnection().close();
+                                            }
+                                            if (pst != null) {
+                                                pst.close();
+                                            }
+                                        } catch (Exception e) {
+                                            System.err.println("Error" + e);
+                                        }
+                                    }
+
+                                %>
+                            </select> 
                                
                                         <input type="text" name="accion" value="insertarAdminOP" hidden>
+                                        <input type="text" name="idTarea" value="<%=idTarea%>" hidden>
+                                       
                                         <button type="submit" class="btn btn-primary">Enviar</button>
 
                                 
@@ -115,7 +161,7 @@
                         </form>
                  
 
-
+                </div>
             </div>
         </div>
 

@@ -243,6 +243,42 @@ public class AgregarTareaDAO {
       }
         return false;
     }
+    
+    public boolean insertarAdminOperario(String idTarea,String idOperario) {
+        Clase_Conexion cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String consulta = "INSERT INTO operarios_has_tareasmantenimiento VALUES(?,?)";
+        try {
+            cn = new Clase_Conexion();
+            pst = cn.getConnection().prepareStatement(consulta);
+            pst.setString(1, idOperario);
+            pst.setString(2, idTarea);
+     
+
+            if (pst.executeUpdate() == 1) {
+                System.out.println("datos actualizados");
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (cn.getConnection() != null) {
+                    cn.getConnection().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error" + e);
+            }
+        }
+        return false;
+    }
     /* public boolean insertarTarea(TareaAdmin tarea){
   boolean agregado=false;
      Clase_Conexion cn=null;
