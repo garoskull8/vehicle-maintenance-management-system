@@ -128,6 +128,7 @@
                                 <input type="number" min="1" class="form-control" name="cantidad" required>
                             </div>
                                 <br>
+                                <input type="text" name="idTarea" value="<%=idTarea%>" hidden>
                                 <input type="text" name="accion" value="agregarRefaccion" hidden>
                                 <button type="submit" class="btn btn-primary">Enviar</button>
                         </form>
