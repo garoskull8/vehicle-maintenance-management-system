@@ -67,27 +67,36 @@ private String agregarTarea = "agregarTarea.jsp";
 
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String acceso = "";
+        String acceso="";
         String accion = request.getParameter("accion");
-
+        
         if(accion.equals("eliminarTarea")){
-           String idtareasMantenimiento = request.getParameter("idtareasMantenimiento");
-            String vehiculos_idevehiculos =request.getParameter("vehiculos_idevehiculos");
-            String nombreTarea=request.getParameter("nombreTarea");
-            String descripcion=request.getParameter("descripcion");
-            String FechaEntrada =request.getParameter("FechaEntrada");
-            String FechaSalida=request.getParameter("FechaSalida"); 
-            String estado = request.getParameter("estado");
-            String prioridad = request.getParameter("prioridad");
-
+         
+             String idTarea = request.getParameter("idTarea");
+             System.out.println("id de la tarea: "+idTarea);
            AgregarTareaDAO rDAO = new AgregarTareaDAO();
-            if(rDAO.eliminarTarea(idtareasMantenimiento,vehiculos_idevehiculos , nombreTarea,descripcion, FechaEntrada,FechaSalida,estado,prioridad)){
-                System.out.println("Eliminado");
+            if(rDAO.eliminarTarea(idTarea)){
+                System.out.println("Eliminado de operarios_has_tareasmantenimiento");
                     }
                    else{
-                    System.out.println("No eliminado");
+                    System.out.println("No eliminado de operarios_has_tareasmantenimiento");
                     }
+            if(rDAO.eliminarTarea2(idTarea)){
+                System.out.println("Eliminado de tareasmantenimiento_has_refacciones");
+                    }
+                   else{
+                    System.out.println("No Eliminado de tareasmantenimiento_has_refacciones");
+                    }
+            if(rDAO.eliminarTarea3(idTarea)){
+               System.out.println("Eliminado de tareasmantenimiento");
+               acceso="tareasvehiculos.jsp";
+            }else{ 
+                System.out.println("No eliminado de tareasmantenimiento");
+                acceso="tareasvehiculos.jsp";
+                }
             }
+        RequestDispatcher vista = request.getRequestDispatcher(acceso);
+        vista.forward(request, response);
     } 
 
 
@@ -105,6 +114,7 @@ private String agregarTarea = "agregarTarea.jsp";
         request.setCharacterEncoding("UTF-8");
         String acceso = "";
         String accion = request.getParameter("accion");
+        
 
       if (accion.equals("actualizaTareasAdmin")){
          String idTarea = request.getParameter("idTarea");
