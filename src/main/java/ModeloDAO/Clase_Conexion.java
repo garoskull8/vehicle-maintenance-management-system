@@ -9,7 +9,7 @@ public class Clase_Conexion{
 
         private String user="root";
 
-	private String password="garobeat123";
+	private String password="edwing";
 
 
 
