@@ -27,14 +27,14 @@
 
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
-       <link href="css/main.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     </head>
 
     <body>
         <%
-               Date dNow = new Date();
+            Date dNow = new Date();
             SimpleDateFormat ft
                     = new SimpleDateFormat("dd/MM/yyyy");
             String currentDate = ft.format(dNow);
@@ -47,7 +47,7 @@
                 request.getSession().setAttribute("expiro", false);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
-            
+
         %>
 
         <!-- Navigation -->
@@ -85,7 +85,7 @@
         <!-- Page Content -->
         <div style="margin-top: 50px;" class="container">
             <div class="row">
-                <a href="tareavehiculos.jsp" class="btn btn-success">Regresar</a>
+                <a href="tareasvehiculos.jsp" class="btn btn-success">Regresar</a>
             </div>
             <br>
             <div class="row">
@@ -94,113 +94,107 @@
                 </div>
                 <br>
                 <div class="container">
+
+                    <!--  <div class="form-group">
+                  
+                         <label for="idTarea" class="control-label col-xs-4">ID:</label>
+                         <input type="text" name="id" id="id" class="form-control" value="${estudiante.nombre}" required="true" />                                   
      
-               <!--  <div class="form-group">
-             
-                    <label for="idTarea" class="control-label col-xs-4">ID:</label>
-                    <input type="text" name="id" id="id" class="form-control" value="${estudiante.nombre}" required="true" />                                   
-
-                    <label for="" class="control-label col-xs-4">Tarea:</label>                   
-                    <input type="text" name="tarea" id="tarea" class="form-control" value="${estudiante.apellido}" required="true"/> 
-
-                   <label for="apellido" class="control-label col-xs-4">Descripción:</label>                   
-                    <input type="text" name="descripcion" id="descripcion" class="form-control" value="${estudiante.apellido}" required="true"/> 
-
-                    <label for="vehiculo" class="control-label col-xs-4">Vehiculo:</label>                    
-                    <input type="text" name="vehiculo" id="vehiculo" class="form-control" value="${estudiante.carrera}" placeholder="Ingrese placas" required="true"/> 
-
-                     <label for="fechaEntrada" class="control-label col-xs-4">Fecha Entrada:</label>                 
-                    <input type="text"  pattern="^\d{2}-\d{2}-\d{4}$" name="fechaEntrada" id="fechaEntrada" class="form-control" value="${estudiante.fechaNacimiento}" maxlength="10" placeholder="YYYY-MM-DD" required="true"/>
-                      
-                    <label for="fechaSalida" class="control-label col-xs-4">Fecha Salida:</label>                 
-                    <input type="text"  pattern="^\d{2}-\d{2}-\d{4}$" name="fechaSalida" id="fechaSalida" class="form-control" value="${estudiante.fechaNacimiento}" maxlength="10" placeholder="YYYY-MM-DD" required="true"/>
-                    
-                    <label for="prioridad" class="control-label col-xs-4">Prioridad</label>
-                    <input type="text" name="prioridad" id="prioridad" class="form-control" value="${estudiante.semestre}" required="true"/>
-
-                    <label for="estado" class="control-label col-xs-4">Estado:</label>                   
-                    <input type="text" name="estado" id="estado" class="form-control" value="${estudiante.email}"  required="true"/>
-                    
-                    <label for="operador" class="control-label col-xs-4">Operador:</label>                   
-                    <input type="text" name="operador" id="operador" class="form-control" value="${estudiante.email}"  required="true"/>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Guardar</button> 
-                </div>  
-                </div>
-        </div>
-             -->
-         <table>
+                         <label for="" class="control-label col-xs-4">Tarea:</label>                   
+                         <input type="text" name="tarea" id="tarea" class="form-control" value="${estudiante.apellido}" required="true"/> 
+     
+                        <label for="apellido" class="control-label col-xs-4">Descripción:</label>                   
+                         <input type="text" name="descripcion" id="descripcion" class="form-control" value="${estudiante.apellido}" required="true"/> 
+     
+                         <label for="vehiculo" class="control-label col-xs-4">Vehiculo:</label>                    
+                         <input type="text" name="vehiculo" id="vehiculo" class="form-control" value="${estudiante.carrera}" placeholder="Ingrese placas" required="true"/> 
+     
+                          <label for="fechaEntrada" class="control-label col-xs-4">Fecha Entrada:</label>                 
+                         <input type="text"  pattern="^\d{2}-\d{2}-\d{4}$" name="fechaEntrada" id="fechaEntrada" class="form-control" value="${estudiante.fechaNacimiento}" maxlength="10" placeholder="YYYY-MM-DD" required="true"/>
+                           
+                         <label for="fechaSalida" class="control-label col-xs-4">Fecha Salida:</label>                 
+                         <input type="text"  pattern="^\d{2}-\d{2}-\d{4}$" name="fechaSalida" id="fechaSalida" class="form-control" value="${estudiante.fechaNacimiento}" maxlength="10" placeholder="YYYY-MM-DD" required="true"/>
+                         
+                         <label for="prioridad" class="control-label col-xs-4">Prioridad</label>
+                         <input type="text" name="prioridad" id="prioridad" class="form-control" value="${estudiante.semestre}" required="true"/>
+     
+                         <label for="estado" class="control-label col-xs-4">Estado:</label>                   
+                         <input type="text" name="estado" id="estado" class="form-control" value="${estudiante.email}"  required="true"/>
+                         
+                         <label for="operador" class="control-label col-xs-4">Operador:</label>                   
+                         <input type="text" name="operador" id="operador" class="form-control" value="${estudiante.email}"  required="true"/>
+                         <br>
+                         <button type="submit" class="btn btn-primary">Guardar</button> 
+                     </div>  
+                     </div>
+             </div>
+                    -->
+                
 
                         <form action="Administrador1" method="post">
-                        <table>
-                        <tr>
-                        <td>ID:</td>
-                        <td><input type="text" size="20" name="id"></td>
-                        </tr>
-                        <tr>
-                        <td>Tarea:</td>
-                        <td><input type="text" size="20" name="tarea"></td>
-                        </tr>
-                        <tr>
-                        <td>Descripción:</td>
-                        <td><input type="text" size="20" name="descripcion"></td>
-                        </tr>
-                        <tr>
-                        <td>Vehiculo:</td>
-                        <td><input type="text" size="20" name="vehiculos" placeholder="Insertar ID de vehiculo"></td>
-                        </tr>
-                        <tr>
-                        <td>Fecha Entrada:</td>
-                        <td><input type="text" size="20" name="fechaEntrada" placeholder="YYYY-MM-DD"></td>
-                        </tr>
-                        <tr>
-                        <td>Fecha Salida:</td>
-                        <td><input type="text" size="20" name="fechaSalida" placeholder="YYYY-MM-DD"></td>
-                        </tr>
-                         <tr>
-                        <td>Prioridad:</td>
-                        <td><input type="text" size="20" name="prioridad"></td>
-                        </tr>
-                         <tr>
-                        <td>Estado:</td>
-                        <td><input type="text" size="20" name="estado"></td>
-                        </tr>
-                        <tr>
-                        <td>
-                             <label class="col-form-label" for="refaccion">Seleccionar Operador:</label>
-                                <select id="operador" class="form-control" name="operador" required>
-                 
-                         <option value="" selected>Seleccionar</option>
-                                    <%
-                                        AgregarTareaDAO dao = new AgregarTareaDAO();
-                                        List<DatosOperador> list = dao.listarOperario(sesion);
-                                        Iterator<DatosOperador> iter = list.iterator();
-                                        DatosOperador alu = null;
-                                        while (iter.hasNext()) {
-                                            alu = iter.next();
+                            <table>
+                                <tr>
+                                    <td>ID:</td>
+                                    <td><input type="text" class="form-control" size="20" name="id" placeholder="ingresa ID"></td>
+                                </tr>
+                                <tr>
+                                    <td>Tarea:</td>
+                                    <td><input type="text" size="20"  class="form-control" name="tarea" placeholder="nombre de tarea"></td>
+                                </tr>
+                                <tr>
+                                    <td>Descripción:</td>
+                                    <td><input type="text" size="20" class="form-control" name="descripcion" placeholder="descripción"></td>
+                                </tr>
+                                <tr>
+                                    <td>Vehiculo:</td>
+                                    <td><input type="text" size="20" class="form-control" name="vehiculos" placeholder="Insertar ID de vehiculo"></td>
+                                </tr>
+                                <tr>
+                                    <td>Fecha Entrada:</td>
+                                    <td><input type="text" size="20" class="form-control" name="fechaEntrada" placeholder="YYYY-MM-DD"></td>
+                                </tr>
+                                <tr>
+                                    <td>Fecha Salida:</td>
+                                    <td><input type="text" size="20" class="form-control" name="fechaSalida" placeholder="YYYY-MM-DD"></td>
+                                </tr>
+                                <tr>
+                                    <td>Prioridad:</td>
+                                    <td>
+                                        
+                                        <select class="form-control" name="prioridad">
+                                            <option value="2">Alta</option>
+                                            <option value="1">Media</option>
+                                            <option value="0">Baja</option>
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    <td>Estado:</td>
+                                    <td>
+                                        <select class="form-control" name="estado">
+                                            <option value="">Selecciona</option>
+                                            <option value="1">Listo</option>
+                                            <option value="0">En reparación</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2" align="center">
+                                        <input type="text" name="accion" value="insertarTarea" hidden>
+                                        <button type="submit" class="btn btn-primary">Enviar</button>
 
-
-                                    %>
-                                    <option value="<%=alu.getIdOper()%>"><%=alu.getNom()%></option>
-                                    <%}%>     </td>
-                        </tr>
-                        <tr>
-                        <td colspan="2" align="center">
-                                <input type="text" name="accion" value="insertarTarea" hidden>
-                                <button type="submit" class="btn btn-primary">Enviar</button>
-  
-                        </tr>
-                        </table>
+                                </tr>
+                           
                         </form>
-                        </td>
-                        </tr>
-                        </table>
-                                    </div>   
-             
-             
-    
+                    </table>
+                </div>   
+
+
+            </div>
+        </div>
+
         <!-- /.container -->
- <!-- Footer -->
+        <!-- Footer -->
         <footer class="py-5 bg-dark">
             <div class="container">
                 <p class="m-0 text-center text-white">Copyright &copy; Equipo 1 2020</p>

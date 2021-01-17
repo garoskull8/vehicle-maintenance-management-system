@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ModeloDAO;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class AgregarTareaDAO {
 
- public List listarTareas(String id) {
+    public List listarTareas(String id) {
         Clase_Conexion cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -38,7 +38,7 @@ public class AgregarTareaDAO {
                 h.setFechaSalida(rs.getString("FechaSalida"));
                 h.setPrioridad(rs.getString("prioridad"));
                 h.setEstado(rs.getString("estado"));
-              
+
                 list.add(h);
             }
         } catch (Exception e) {
@@ -61,12 +61,12 @@ public class AgregarTareaDAO {
         return list;
     }
 
-  public boolean insertarTarea(String idtareasMantenimiento, String vehiculos_idvehiculos , String nombreTarea,String descripcion, String FechaEntrada, String FechaSalida,String estado, String prioridad){
-        Clase_Conexion cn=null;
-        PreparedStatement pst=null;
-        ResultSet rs=null;
-        String consulta="INSERT INTO tareasmantenimiento VALUES(?,?,?,?,?,?,?,?);";
-        try{
+    public boolean insertarTarea(String idtareasMantenimiento, String vehiculos_idvehiculos, String nombreTarea, String descripcion, String FechaEntrada, String FechaSalida, String estado, String prioridad) {
+        Clase_Conexion cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        String consulta = "INSERT INTO tareasmantenimiento VALUES(?,?,?,?,?,?,?,?);";
+        try {
             cn = new Clase_Conexion();
             pst = cn.getConnection().prepareStatement(consulta);
             pst.setString(1, idtareasMantenimiento);
@@ -78,11 +78,11 @@ public class AgregarTareaDAO {
             pst.setString(7, estado);
             pst.setString(8, prioridad);
 
-             if(pst.executeUpdate()==1){
-              System.out.println("datos actualizados");
-              return true;
-          }
-        }catch (Exception e) {
+            if (pst.executeUpdate() == 1) {
+                System.out.println("datos actualizados");
+                return true;
+            }
+        } catch (Exception e) {
             System.out.println(e);
         } finally {
             try {
@@ -102,11 +102,11 @@ public class AgregarTareaDAO {
         return false;
     }
 
-public List listarOperario(String IdOper) {
+    public List listarOperario(String IdOper) {
         Clase_Conexion cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-        ArrayList<DatosOperador> list = new ArrayList<>(); 
+        ArrayList<DatosOperador> list = new ArrayList<>();
         String consulta = "SELECT idoperarios,nombre FROM operarios;";
         try {
             cn = new Clase_Conexion();
@@ -138,14 +138,56 @@ public List listarOperario(String IdOper) {
         }
         return list;
     }
-  public boolean eliminarTarea(String idtareasMantenimiento, String vehiculos_idevehiculos , String nombreTarea,String descripcion, String FechaEntrada, String FechaSalida,String estado, String prioridad) {
-        String query = "DELETE FROM tareasmantenimiento ;";
-        ResultSet rs=null;
-        PreparedStatement  pst=null;
+
+    public List listarOperariosTarea(String idTarea) {
         Clase_Conexion cn = null;
-        try{
-            cn = new Clase_Conexion();  
-        pst=cn.getConnection().prepareStatement(query);
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        ArrayList<DatosOperador> list = new ArrayList<>();
+        String consulta = "SELECT o.idoperarios,o.nombre,o.ap,o.am FROM operarios_has_tareasmantenimiento ot\n" +
+"INNER JOIN operarios o ON o.idoperarios=ot.operarios_idoperarios \n" +
+"WHERE ot.tareasMantenimiento_idtareasMantenimiento="+idTarea+";";
+        try {
+            cn = new Clase_Conexion();
+            pst = cn.getConnection().prepareStatement(consulta);
+            rs = pst.executeQuery(consulta);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                DatosOperador h = new DatosOperador();
+                h.setIdOper(rs.getString("idoperarios"));
+                h.setNom(rs.getString("nombre"));
+                h.setAp(rs.getString("ap"));
+                h.setAm(rs.getString("am"));
+                list.add(h);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (cn.getConnection() != null) {
+                    cn.getConnection().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error" + e);
+            }
+        }
+        return list;
+    }
+
+    public boolean eliminarTarea(String idtareasMantenimiento, String vehiculos_idevehiculos, String nombreTarea, String descripcion, String FechaEntrada, String FechaSalida, String estado, String prioridad) {
+        String query = "DELETE FROM tareasmantenimiento ;";
+        ResultSet rs = null;
+        PreparedStatement pst = null;
+        Clase_Conexion cn = null;
+        try {
+            cn = new Clase_Conexion();
+            pst = cn.getConnection().prepareStatement(query);
             pst.setString(1, idtareasMantenimiento);
             pst.setString(2, vehiculos_idevehiculos);
             pst.setString(3, nombreTarea);
@@ -155,8 +197,37 @@ public List listarOperario(String IdOper) {
             pst.setString(7, estado);
             pst.setString(8, prioridad);
 
-      
-
+            if (pst.executeUpdate() == 1) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error" + ex);
+        } finally {
+            try {
+                if (cn.getConnection() != null) {
+                    cn.getConnection().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error" + e);
+            }
+        }
+        return false;
+    }
+    
+    public boolean eliminarOperario(String idTarea, String idOperario) {
+        String query = "DELETE FROM operarios_has_tareasmantenimiento WHERE operarios_idoperarios=? "
+                + "AND tareasMantenimiento_idtareasMantenimiento=? ";
+        ResultSet rs=null;
+        PreparedStatement  pst=null;
+        Clase_Conexion cn = null;
+        try{
+            cn = new Clase_Conexion();  
+        pst=cn.getConnection().prepareStatement(query);
+         pst.setString(1, idOperario);
+         pst.setString(2, idTarea);
           if(pst.executeUpdate()==1){
               return true;
           }
@@ -172,7 +243,7 @@ public List listarOperario(String IdOper) {
       }
         return false;
     }
-  /* public boolean insertarTarea(TareaAdmin tarea){
+    /* public boolean insertarTarea(TareaAdmin tarea){
   boolean agregado=false;
      Clase_Conexion cn=null;
   try {
@@ -192,5 +263,3 @@ public List listarOperario(String IdOper) {
   return agregado;
  }*/
 }
-   
-

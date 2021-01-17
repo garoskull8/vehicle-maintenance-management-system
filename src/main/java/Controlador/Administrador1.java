@@ -87,6 +87,24 @@ private String agregarTarea = "agregarTarea.jsp";
                    else{
                     System.out.println("No eliminado");
                     }
+            }else if(accion.equals("eliminarOperadorAdmin")){
+                String idTarea=request.getParameter("idTarea");
+                String idOperario=request.getParameter("idOperario");
+                System.out.println(idTarea+idOperario);
+                AgregarTareaDAO rDAO = new AgregarTareaDAO();
+                if(rDAO.eliminarOperario(idTarea, idOperario)){
+                    acceso="administradorTareaOperarios.jsp";
+                    System.out.println("Operador borrado actualizada"); 
+                    request.setAttribute("idTarea", idTarea);
+                }else{
+                    acceso="administradorTareaOperarios.jsp";
+                    System.out.println("Operador No borrado actualizada"); 
+                    request.setAttribute("idTarea", idTarea);
+                    request.setAttribute("error", true);
+                }
+                RequestDispatcher vista = request.getRequestDispatcher(acceso);
+        vista.forward(request, response);
+                
             }
     } 
 
@@ -136,11 +154,11 @@ private String agregarTarea = "agregarTarea.jsp";
                if (dao.insertarTarea(idtareasMantenimiento,vehiculos_idevehiculos,nombreTarea,descripcion,FechaEntrada,FechaSalida,estado,prioridad) )
                {
                System.out.println("Agregado");
-               acceso="agregarTarea.jsp";
+               acceso="tareasvehiculos.jsp";
                 System.out.println(acceso);
                 }else {
                 System.out.println("No agregado");
-               acceso="agregarTarea.jsp";
+               acceso="tareasvehiculos.jsp";
                         }
                                                 }
 

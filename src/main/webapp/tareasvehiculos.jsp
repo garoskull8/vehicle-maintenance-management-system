@@ -84,7 +84,7 @@
         <div style="margin-top: 50px;" class="container">
             <div class="row">
                 <a href="index.jsp" class="btn btn-success">Regresar</a>
-                 <a href="agregarTarea.jsp" class="btn btn-success">Agregar Tarea</a>
+                 <a style="margin-left:900px; " href="agregarTarea.jsp" class="btn btn-success">Agregar Tarea</a>
             </div>
             <div class="row">
                 <h1>Tareas de mantenimiento vehicular</h1>
@@ -168,7 +168,7 @@
                                         
                                     </td>
                                     <td> 
-                                        <a class="btn btn-primary" href="agregarOperario.jsp?id=<%=alu.getId()%>">Operarios</a>
+                                        <a class="btn btn-primary" href="administradorTareaOperarios.jsp?idTarea=<%=alu.getId()%>">Operarios</a>
                                     </td>
                                     <td>
                                         <input type="text" value="<%=alu.getId()%>" name="idTarea" hidden>
