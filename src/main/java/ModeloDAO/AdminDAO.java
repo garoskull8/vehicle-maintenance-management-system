@@ -51,6 +51,111 @@ public class AdminDAO {
         }
         return false;
     }
-}
+  public List listarTarea(String id) {
+        Clase_Conexion cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
 
+        ArrayList<TAREAV> list = new ArrayList<>();
+        String consulta = " SELECT t.idtareasMantenimiento,t.nombreTarea,t.descripcion,v.placas,t.FechaEntrada,t.FechaSalida,t.prioridad,t.estado \n" +
+" FROM tareasmantenimiento t \n" +
+" INNER JOIN vehiculos v \n" +
+" ON v.idvehiculos = t.vehiculos_idvehiculos \n;" ;
+
+        try {
+            cn = new Clase_Conexion();
+            pst = cn.getConnection().prepareStatement(consulta);
+            rs = pst.executeQuery(consulta);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                TAREAV h = new TAREAV();
+                h.setId(rs.getString("idtareasMantenimiento"));
+                h.setTarea(rs.getString("nombreTarea"));
+                h.setDescripcion(rs.getString("descripcion"));
+                h.setVehiculo(rs.getString("placas"));
+                h.setFechaEntrada(rs.getString("FechaEntrada"));
+                h.setFechaSalida(rs.getString("FechaSalida"));
+                h.setPrioridad(rs.getString("prioridad"));
+                h.setEstado(rs.getString("estado"));
+            
+                list.add(h);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (cn.getConnection() != null) {
+                    cn.getConnection().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error" + e);
+            }
+        }
+        return list;
+    }
     
+ 
+
+ public boolean actualizarTareasAdmin(String id,String prioridad, String estado){
+        PreparedStatement  pst=null;
+        Clase_Conexion cn = null;
+        try{
+          cn = new Clase_Conexion();        
+          String consulta="UPDATE tareasmantenimiento SET prioridad=?,estado=? WHERE idtareasMantenimiento=?";
+          pst=cn.getConnection().prepareStatement(consulta);
+          pst.setString(1,prioridad);
+          pst.setString(2,estado);
+          pst.setString(3,id);
+          
+          if(pst.executeUpdate()==1){ //afecto 1 fila
+              return true;
+          }
+      }catch(Exception ex){
+          System.err.println("Error"+ex);
+          
+      }finally{
+          try{
+          if(cn.getConnection()!=null)cn.getConnection().close();
+          if(pst!=null)pst.close();
+          }catch(Exception e){
+                  System.err.println("Error"+e);
+                  }
+      }
+        
+        return false;
+    }
+
+public boolean eliminarTarea(String idTarea, String idRefaccion, String cantidad) {
+        String query = "DELETE FROM tareasmantenimiento_has_refacciones WHERE tareasMantenimiento_idtareasMantenimiento=?"
+                + "AND refacciones_idrefacciones=?";
+        ResultSet rs=null;
+        PreparedStatement  pst=null;
+        Clase_Conexion cn = null;
+        try{
+            cn = new Clase_Conexion();  
+        pst=cn.getConnection().prepareStatement(query);
+         pst.setString(1, idTarea);
+         pst.setString(2, idRefaccion);
+          if(pst.executeUpdate()==1){
+              return true;
+          }
+        }catch(SQLException ex){
+          System.err.println("Error"+ex);
+        }finally{
+          try{
+          if(cn.getConnection()!=null)cn.getConnection().close();
+          if(pst!=null)pst.close();
+          }catch(Exception e){
+                  System.err.println("Error"+e);
+                  }
+      }
+        return false;
+    }
+
+}

@@ -1,12 +1,18 @@
-C:\Users\dolores\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\Controlador\Operador.java
-C:\Users\dolores\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\Refacciones.java
-C:\Users\dolores\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\RefaccionesOPDAO.java
-C:\Users\dolores\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\Clase_Conexion.java
-C:\Users\dolores\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\Controlador\Check.java
-C:\Users\dolores\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\Controlador\Logins.java
-C:\Users\dolores\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\AdminDAO.java
-C:\Users\dolores\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\Tiempos.java
-C:\Users\dolores\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\Controlador\CerrarSesion.java
-C:\Users\dolores\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\DatosOperador.java
-C:\Users\dolores\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\TareaAsignadaOP.java
-C:\Users\dolores\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\OperadorDAO.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\Controlador\Check.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\AdminDAO.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\Tiempos.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\TareaVDAO.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\DatosOperador.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\Controlador\CerrarSesion.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\Controlador\Operador.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\TareaAsignadaOP.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\Controlador\Logins.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\AgregarTareaDAO.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\Refacciones.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\TAREAV.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\Controlador\Administrador.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\TareaAdmin.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\Controlador\Administrador1.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\OperadorDAO.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\RefaccionesOPDAO.java
+C:\Users\Alondra Jelinet\Documents\GitHub\vehicle-maintenance-management-system\src\main\java\ModeloDAO\Clase_Conexion.java
