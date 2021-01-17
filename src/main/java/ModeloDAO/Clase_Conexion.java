@@ -8,12 +8,11 @@ public class Clase_Conexion{
 	private Connection cn;
 
         private String user="root";
-<<<<<<< HEAD
+
 
 	private String password="edwing";
-=======
-	private String password="garobeat123";
->>>>>>> 9c5c357de2cc109c2a172de49e0387d0e6439386
+
+
 
 	private String url="jdbc:mysql://localhost:3306/vehicle-maintenance-management-system?useSSL=false";
 
