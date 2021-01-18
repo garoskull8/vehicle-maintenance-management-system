@@ -80,16 +80,16 @@ public class cocheDAO {
         return listaMayor;
     }
     */
-     public List statuscoche(String id) {
+     public List statuscoche() {
         Clase_Conexion cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
 
-       ArrayList<TareaAsignadaOP> list = new ArrayList<>();
+   ArrayList<TareaAsignadaOP> list = new ArrayList<>();
         String consulta = "SELECT t.idtareasMantenimiento, v.chofer_idchofer,v.placas,t.descripcion,t.FechaEntrada,t.FechaSalida,t.estado FROM operarios_has_tareasmantenimiento ot\n"
                 + "INNER JOIN operarios o ON o.idoperarios=ot.operarios_idoperarios\n"
                 + "INNER JOIN tareasmantenimiento t ON t.idtareasMantenimiento=ot.tareasMantenimiento_idtareasMantenimiento \n"
-                + "INNER JOIN vehiculos v ON v.idvehiculos=t.vehiculos_idvehiculos INNER JOIN chofer p ON  v.chofer_idchofer = p.idchofer WHERE o.email='" + id + "';";
+                + "INNER JOIN vehiculos v ON v.idvehiculos=t.vehiculos_idvehiculos INNER JOIN chofer p ON  v.chofer_idchofer = p.idchofer WHERE v.chofer_idchofer=p.idchofer LIMIT 1";
         try {
             cn = new Clase_Conexion();
             pst = cn.getConnection().prepareStatement(consulta);

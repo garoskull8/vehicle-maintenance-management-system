@@ -31,22 +31,12 @@
     </head>
 
     <body>
-        <%
+       
 
-            Date dNow = new Date();
-            SimpleDateFormat ft
-                    = new SimpleDateFormat("dd/MM/yyyy");
-            String currentDate = ft.format(dNow);
-            String sesion = null;
-            if (session.getAttribute("operador") != null) {
-                sesion = (String) session.getAttribute("operador");
-                //out.println("Sesion iniciada: "+sesion );
-                out.println("Sesion iniciada: " + sesion);
-            } else {
-                request.getSession().setAttribute("expiro", false);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
-        %>
+          
+           
+            
+     
 
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -110,7 +100,8 @@
                             <tbody>
                                 <%
                                 cocheDAO dao = new cocheDAO();
-                                List<TareaAsignadaOP> list = dao.statuscoche(sesion);
+                                 String id = request.getParameter("id");
+                                List<TareaAsignadaOP> list = dao.statuscoche();
                                 Iterator<TareaAsignadaOP> iter = list.iterator();
                                 TareaAsignadaOP alu = null;
                                 while (iter.hasNext()) {
