@@ -174,7 +174,7 @@
                                         <input type="text" value="<%=alu.getId()%>" name="idTarea" hidden>
                                         <input type="text" value="actualizaTareasAdmin" name="accion" hidden>
                                         <button type="submit" class="btn btn-success">Actualizar</button>
-                                        <a class="btn btn-warning" href="Administrador1?accion=">Eliminar</a>
+                                        <a class="btn btn-warning" href="Administrador1?accion=eliminarTarea&idTarea=<%=alu.getId()%>">Eliminar</a>
                                         
                                   
                                     </td>

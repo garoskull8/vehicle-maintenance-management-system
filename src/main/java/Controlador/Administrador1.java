@@ -68,26 +68,35 @@ public class Administrador1 extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String acceso = "";
+        String acceso="";
         String accion = request.getParameter("accion");
 
-        if (accion.equals("eliminarTarea")) {
-            String idtareasMantenimiento = request.getParameter("idtareasMantenimiento");
-            String vehiculos_idevehiculos = request.getParameter("vehiculos_idevehiculos");
-            String nombreTarea = request.getParameter("nombreTarea");
-            String descripcion = request.getParameter("descripcion");
-            String FechaEntrada = request.getParameter("FechaEntrada");
-            String FechaSalida = request.getParameter("FechaSalida");
-            String estado = request.getParameter("estado");
-            String prioridad = request.getParameter("prioridad");
 
-            AgregarTareaDAO rDAO = new AgregarTareaDAO();
-            if (rDAO.eliminarTarea(idtareasMantenimiento, vehiculos_idevehiculos, nombreTarea, descripcion, FechaEntrada, FechaSalida, estado, prioridad)) {
-                System.out.println("Eliminado");
-            } else {
-                System.out.println("No eliminado");
-            }
-        } else if (accion.equals("eliminarOperadorAdmin")) {
+        if(accion.equals("eliminarTarea")){
+         
+             String idTarea = request.getParameter("idTarea");
+             System.out.println("id de la tarea: "+idTarea);
+           AgregarTareaDAO rDAO = new AgregarTareaDAO();
+            if(rDAO.eliminarTarea(idTarea)){
+                System.out.println("Eliminado de operarios_has_tareasmantenimiento");
+                    }
+                   else{
+                    System.out.println("No eliminado de operarios_has_tareasmantenimiento");
+                    }
+            if(rDAO.eliminarTarea2(idTarea)){
+                System.out.println("Eliminado de tareasmantenimiento_has_refacciones");
+                    }
+                   else{
+                    System.out.println("No Eliminado de tareasmantenimiento_has_refacciones");
+                    }
+            if(rDAO.eliminarTarea3(idTarea)){
+               System.out.println("Eliminado de tareasmantenimiento");
+               acceso="tareasvehiculos.jsp";
+            }else{ 
+                System.out.println("No eliminado de tareasmantenimiento");
+                acceso="tareasvehiculos.jsp";
+                }
+            } else if (accion.equals("eliminarOperadorAdmin")) {
             String idTarea = request.getParameter("idTarea");
             String idOperario = request.getParameter("idOperario");
             System.out.println(idTarea + idOperario);
@@ -102,6 +111,7 @@ public class Administrador1 extends HttpServlet {
                 request.setAttribute("idTarea", idTarea);
                 request.setAttribute("error", true);
             }
+
 
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
@@ -123,6 +133,7 @@ public class Administrador1 extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String acceso = "";
         String accion = request.getParameter("accion");
+        
 
         if (accion.equals("actualizaTareasAdmin")) {
             String idTarea = request.getParameter("idTarea");
