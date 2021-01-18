@@ -57,7 +57,7 @@
               <img src="img/LOGO-IPN.png" alt="logo" class="logo" width="15%" height="15%">
           </div>
           <div class="login-wrapper my-auto">
-            <h1 class="login-title">Log in Admin</h1>
+            <h1 class="login-title">Login Admin</h1>
             <form action="Logins" method="post">
               <div class="form-group">
                 <label for="email">Email</label>

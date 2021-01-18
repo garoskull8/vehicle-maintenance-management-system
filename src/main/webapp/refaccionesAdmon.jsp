@@ -38,6 +38,7 @@
                 </div>
             </div>
         </div>
+        
         <br>
         
         <br>
@@ -138,7 +139,9 @@
                 </div>
             </div>
         </div> 
-                            
+        <div class="card-body">
+            <a href="adminDashboard.jsp" class="btn btn-primary">Regresar</a>
+        </div>                    
         <!-- /.container -->
 
         <!-- Footer -->
