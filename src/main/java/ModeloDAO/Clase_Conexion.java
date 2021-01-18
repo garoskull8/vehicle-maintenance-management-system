@@ -9,11 +9,13 @@ public class Clase_Conexion{
 	private Connection cn;
 
         private String user="root";
+
 	private String password="garobeat123";
 	private String url="jdbc:mysql://localhost:3306/vehicle-maintenance-management-system?useSSL=false";
 
         PreparedStatement pstm = null;
-    ResultSet rs = null;
+        ResultSet rs = null;
+
 
 
  

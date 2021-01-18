@@ -73,8 +73,10 @@
         <div class="card h-100">
           <img class="card-img-top" src="img/administrador.png" alt="">
           <div class="card-body">
-              <h4 class="card-title"><strong>Administrativo</strong></h4>
-            <p class="card-text">Iniciar sesión como Administrativo.</p>
+
+              <h4 class="card-title"><strong>Administrador</strong></h4>
+            <p class="card-text">Iniciar sesión como Administrador.</p>
+
           </div>
           <div class="card-footer">
             <a href="Login_Admin.jsp" class="btn btn-success botonRedondo">Continuar</a>

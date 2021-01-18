@@ -51,11 +51,58 @@ public class AdminDAO {
         }
         return false;
     }
+    
+     public List DatosAdmon(String email) {
+         Clase_Conexion cn = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+         ArrayList<DatosAdmon> list = new ArrayList<>();
+        String consulta = "SELECT * FROM administardor where email='"+email+"';";
+         try {
+            cn = new Clase_Conexion();
+            pst = cn.getConnection().prepareStatement(consulta);
+            rs = pst.executeQuery(consulta);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+        DatosAdmon admon=new DatosAdmon();
+               admon.setNom(rs.getString("nombre"));
+               admon.setAp(rs.getString("ap"));
+               admon.setAm(rs.getString("am"));
+               admon.setCurp(rs.getString("curp"));
+               admon.setFechaNac(rs.getString("fechaNacimiento"));
+               admon.setCalle(rs.getString("calle"));
+               admon.setNumero("numero");
+               admon.setColonia(rs.getString("colonia"));
+               admon.setEstado(rs.getString("delegacion"));
+               admon.setEmail(rs.getString("email"));
+               admon.setIdOper(rs.getString("idoperarios"));
+                list.add(admon);
+      }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            try {
+                if (cn.getConnection() != null) {
+                    cn.getConnection().close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+                System.err.println("Error" + e);
+            }
+        }
+        return list;
+
+    }
   public List listarTarea(String id) {
+
         Clase_Conexion cn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
-
         ArrayList<TAREAV> list = new ArrayList<>();
         String consulta = " SELECT t.idtareasMantenimiento,t.nombreTarea,t.descripcion,v.placas,t.FechaEntrada,t.FechaSalida,t.prioridad,t.estado \n" +
 " FROM tareasmantenimiento t \n" +
@@ -68,6 +115,7 @@ public class AdminDAO {
             rs = pst.executeQuery(consulta);
             rs = pst.executeQuery();
             while (rs.next()) {
+
                 TAREAV h = new TAREAV();
                 h.setId(rs.getString("idtareasMantenimiento"));
                 h.setTarea(rs.getString("nombreTarea"));
@@ -79,6 +127,7 @@ public class AdminDAO {
                 h.setEstado(rs.getString("estado"));
             
                 list.add(h);
+
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -98,9 +147,9 @@ public class AdminDAO {
             }
         }
         return list;
+
     }
-    
- 
+
 
  public boolean actualizarTareasAdmin(String id,String prioridad, String estado){
         PreparedStatement  pst=null;
