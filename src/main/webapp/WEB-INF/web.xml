@@ -10,6 +10,10 @@
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>Administrador2</servlet-name>
+        <servlet-class>Controlador.Administrador2</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Operador</servlet-name>
         <url-pattern>/Operador</url-pattern>
@@ -17,5 +21,9 @@
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Administrador2</servlet-name>
+        <url-pattern>/Administrador2</url-pattern>
     </servlet-mapping>
 </web-app>

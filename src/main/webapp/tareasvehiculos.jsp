@@ -83,7 +83,7 @@
              <!-- Page Content -->
         <div style="margin-top: 50px;" class="container">
             <div class="row">
-                <a href="index.jsp" class="btn btn-success">Regresar</a>
+                <a href="adminDashboard.jsp" class="btn btn-success">Regresar</a>
                  <a style="margin-left:900px; " href="agregarTarea.jsp" class="btn btn-success">Agregar Tarea</a>
             </div>
             <div class="row">

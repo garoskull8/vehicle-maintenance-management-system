@@ -57,7 +57,7 @@ public class AdminDAO {
         PreparedStatement pst = null;
         ResultSet rs = null;
          ArrayList<DatosAdmon> list = new ArrayList<>();
-        String consulta = "SELECT * FROM administardor where email='"+email+"';";
+        String consulta = "SELECT * FROM administrador where email='"+email+"';";
          try {
             cn = new Clase_Conexion();
             pst = cn.getConnection().prepareStatement(consulta);
@@ -68,14 +68,8 @@ public class AdminDAO {
                admon.setNom(rs.getString("nombre"));
                admon.setAp(rs.getString("ap"));
                admon.setAm(rs.getString("am"));
-               admon.setCurp(rs.getString("curp"));
-               admon.setFechaNac(rs.getString("fechaNacimiento"));
-               admon.setCalle(rs.getString("calle"));
-               admon.setNumero("numero");
-               admon.setColonia(rs.getString("colonia"));
-               admon.setEstado(rs.getString("delegacion"));
                admon.setEmail(rs.getString("email"));
-               admon.setIdOper(rs.getString("idoperarios"));
+               
                 list.add(admon);
       }
         } catch (Exception e) {

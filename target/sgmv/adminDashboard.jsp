@@ -34,8 +34,8 @@
             SimpleDateFormat ft = new SimpleDateFormat("dd/MM/yyyy");
             String currentDate = ft.format(dNow);
             String sesion = null;
-            if (session.getAttribute("administrador") != null) {
-                sesion = (String) session.getAttribute("administrador");
+            if (session.getAttribute("admin") != null) {
+                sesion = (String) session.getAttribute("admin");
                 //out.println("Sesion iniciada: "+sesion );
                 out.println("Sesion iniciada: " + sesion);
             } else {
@@ -43,12 +43,7 @@
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
 
-            AdminDAO dao = new AdminDAO();
-            List<DatosAdmon> list = dao.DatosAdmon(sesion);
-            Iterator<DatosAdmon> iter = list.iterator();
-            DatosAdmon admon = null;
-            while (iter.hasNext()) {
-                admon = iter.next();
+           
         %>
         
         <header id="header">
@@ -56,19 +51,18 @@
 
                 <div class="profile">
                     <img src="img/Admin1.png" alt="" class="img-fluid rounded-circle">
-                    <h1 class="text-light"><p>Nombre</p></h1>
-
-                    <h5 class="text-light" style="text-align: center"><p>Apellidos</p></h5>
+                    <%
+                        AdminDAO dao = new AdminDAO();
+            List<DatosAdmon> list = dao.DatosAdmon(sesion);
+            Iterator<DatosAdmon> iter = list.iterator();
+            DatosAdmon admon = null;
+            while (iter.hasNext()) {
+                admon = iter.next();%>
+                    <h1 class="text-light"><p><%=admon.getNom()%> <%=admon.getAp() %></p></h1>
                     <hr>
-                    <p class="text-light" style="text-align: center">Correo</p>
-
-                    <!-- <div class="social-links mt-3 text-center">
-                       <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                       <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                       <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                       <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                       <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                     </div> -->
+                    <p class="text-light" style="text-align: center"><%=admon.getEmail() %></p>
+ <%}%>
+                    
                 </div>
 
 
@@ -89,6 +83,7 @@
 
             </div>
         </header>
+       
         <main id="main" style="align-content: center;" >        
             <!-- Jumbotron Header -->
             <div >

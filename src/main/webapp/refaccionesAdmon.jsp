@@ -40,7 +40,10 @@
         </div>
         
         <br>
-        
+        <div class="row">
+                
+                 <a style="margin-left: 50px; " href="adminDashboard.jsp" class="btn btn-success">Regresar</a>
+            </div>
         <br>
         <!-- Nav tabs -->
         <div class= "container p-5">
@@ -60,7 +63,7 @@
             <div class="tab-content">
                 <div id="registro" class="container tab-pane active"><br>
                     <!-- Formualrio del botón registro-->
-                    <form  action="Administrador" method="post" >
+                    <form  action="Administrador2" method="post" >
                         <div class="form-label-group">
                             <label for="inputNombre">Nombre: </label>
                             <input type="text" id="inputNombre" class="form-control" placeholder="Nombre" name="nombre" required autofocus>                           
@@ -101,7 +104,7 @@
                                         <td><%=alu.getNombre()%></td>
                                         <td><%=alu.getCantidad()%></td>
                                         <td>
-                                            <a class="btn btn-danger"  href="Administrador?accion=eliminarRefaccion&idRefaccion=<%=alu.getId()%>">Eliminar</a>
+                                            <a class="btn btn-danger"  href="Administrador2?accion=eliminarRefaccion&idRefaccion=<%=alu.getId()%>">Eliminar</a>
                                         </td>
                                     </tr> 
                                     <%}%>
@@ -112,7 +115,7 @@
                 </div>
                 <div id="actualizar" class="container tab-pane "><br>
                     <!-- Formualrio para actualizar stock-->
-                    <form  action="Administrador" method="post" >
+                    <form  action="Administrador2" method="post" >
                         <label class="col-form-label" for="refaccion">Seleccionar refacción:</label>
                         <div class="row">
                             <select id="refaccion" class="form-control" name="idRefaccion" required>
