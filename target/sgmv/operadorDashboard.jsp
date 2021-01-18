@@ -141,18 +141,7 @@
         </div>
       </div>
               
-                 <div class="col-md-5">
-        <div class="card h-100">
-          <img class="card-img-top" width="100" height="225" src="img/mes-trabajo.jpg" alt="">
-          <div class="card-body">
-              <h4 class="card-title" style="text-align: center"><strong>Status Coche</strong></h4>
-            <p class="card-text" style="text-align: center">Checa el status de los coches</p>
-          </div>
-          <div class="card-footer">
-            <a href="statuscoche.jsp" class="btn btn-danger botonRedondo">Continuar</a>
-          </div>
-        </div>
-      </div>
+              
                   
               
               
