@@ -18,6 +18,15 @@ public class TareaAsignadaOP {
     private String fechaSalida;
     private String prioridad;
     private String estado;
+    private String idchofer;
+
+    public String getIdchofer() {
+        return idchofer;
+    }
+
+    public void setIdchofer(String idchofer) {
+        this.idchofer = idchofer;
+    }
 
     public String getId() {
         return id;
